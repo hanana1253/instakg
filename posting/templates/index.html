@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock head %}
+{% block maincontent %}
+{% for posting in postings_list.all %}
+  <article class="posting">
+  </article>
+{% endfor %}
+{% endblock maincontent %}
