@@ -9,8 +9,8 @@
 <ul class="profile_counters">
   <li>{{ profile.posts.all | length }}</li>
   <!-- relationship 모델 추가하거나 아예 get_context_data로 오버라이딩하기 -->
-  <li>{{ profile.relationship.followers | length }}</li>
-  <li>{{ profile.relationship.followings | length }}</li>
+  <li>{{ profile.relationship.followers.all | length }}</li>
+  <li>{{ profile.target_relationship.all | length }}</li>
 </ul>
 <h3>{{ profile.name }}</h3>
 <p>{{ profile.introduction }}</p>

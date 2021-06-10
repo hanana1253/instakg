@@ -11,5 +11,4 @@ class FollowService():
             target_profile.relationship.followers.remove(my_profile)
         else:
             target_profile.relationship.followers.add(my_profile)
-        
         return
