@@ -6,7 +6,7 @@ from authentication.models import Profile
 
 class Posting(BaseFields):
     author = models.ForeignKey(Profile, on_delete=models.SET_NULL, related_name='posts', null=True, blank=True)
-    photo = models.ImageField(blank=True)
+    photo = models.ImageField(upload_to='posting_pics')
     content = models.TextField()
     like_users = models.ManyToManyField(Profile, related_name='liked_posts')
 
