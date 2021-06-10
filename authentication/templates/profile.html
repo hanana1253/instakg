@@ -17,14 +17,14 @@
 {% if user == profile.user %}
 <a href="{% url 'profile:edit' profile.pk %}">프로필 편집</a>
 {% else %}
-<!-- <form action="{% url 'social:follow' profile.pk %}" method="POST">
+<form action="{% url 'social:follow' profile.pk %}" method="POST">
   {% csrf_token %}
   {% if user.profile in profile.relationship.followers.all %}
   <button type="submit">팔로우 취소</button>
   {% else %}
   <button type="submit">팔로우</button>
   {% endif %}
-</form> -->
+</form>
 {% endif %}
 
 <!-- 게시물 article로 -->
