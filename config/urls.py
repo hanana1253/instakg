@@ -22,4 +22,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls), 
     path('', IndexTimelineView.as_view(), name='index'),
+    path('profile/', include('authentication.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
