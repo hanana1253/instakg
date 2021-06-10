@@ -2,8 +2,14 @@
 {% block head %}
 {% endblock head %}
 {% block maincontent %}
+<h2>나는 인덱스페이지의 헤딩2이다</h2>
 {% for posting in postings_list.all %}
   <article class="posting">
+    <h3>나는 {{ posting.pk }}번 아티클의 헤딩3이다</h3>
+    <figure>
+      <img src="{{ posting.photo.url }}" alt="업로드된 사진" />
+      <figcaption>내용: {{ posting.content }}</figcaption>
+    </figure> 
   </article>
 {% endfor %}
 {% endblock maincontent %}
