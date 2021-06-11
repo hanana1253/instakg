@@ -16,6 +16,9 @@
     </label>
     <button type="submit">로그인</button>
   </form>
+  {% if error.state %}
+  <p class="error_msg">{{ error.msg }}</p>
+  {% endif %}
 </section>
 <section class="redirect">
   <h2>나는 회원가입으로 인도하는 문이다.</h2>
