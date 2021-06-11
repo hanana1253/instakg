@@ -5,7 +5,7 @@
 <h2>나는 프로필 메인영역의 헤딩2레벨이다</h2>
 <!-- 프로필 사진 -->
 <img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
-<h3>{{ profile.user.username }}</h3>
+<h3>@{{ profile.user.username }}</h3>
 <ul class="profile_counters">
   <li>{{ profile.posts.all | length }}</li>
   <!-- relationship 모델 추가하거나 아예 get_context_data로 오버라이딩하기 -->
@@ -15,7 +15,7 @@
 <h3>{{ profile.name }}</h3>
 <p>{{ profile.introduction }}</p>
 {% if user == profile.user %}
-<a href="{% url 'profile:edit' profile.pk %}">프로필 편집</a>
+<a href="{% url 'user:edit' profile.pk %}">프로필 편집</a>
 {% else %}
 <form action="{% url 'social:follow' profile.pk %}" method="POST">
   {% csrf_token %}
@@ -32,6 +32,4 @@
   <img src="{{ posting.photo.url }}" alt="사진" width="100px">
   {% endfor %}
 </div>
-
-<!-- 게시물 article로 -->
 {% endblock maincontent %}

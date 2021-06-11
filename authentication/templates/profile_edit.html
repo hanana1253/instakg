@@ -14,7 +14,7 @@
   <li>{{ profile.relationship.followings | length }}</li>
 </ul>
 {% if user == profile.user %}
-<a href="{% url 'profile:edit' profile.pk %}">프로필 편집</a>
+<a href="{% url 'user:edit' profile.pk %}">프로필 편집</a>
 {% endif %}
 
 <!-- 계정 아이디, 게시물 수, 팔로잉 팔로워 수, 유저 닉네임, 유저 소개글 -->
