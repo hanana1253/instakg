@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic, View
 from authentication.models import Profile
 from social.services import FollowService
@@ -16,3 +16,21 @@ class ProfileEditView(View):
 
     def post(self, request, *args, **kwargs):
         pass
+
+class SignupView(View):
+    def get(self, request, *args, **kwargs):
+        pass
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+class LoginView(View):
+    def get(self, request, *args, **kwargs):
+        pass
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+def logout(request):
+    auth.logout(request)
+    return redirect('index')
