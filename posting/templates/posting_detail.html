@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock head %}
+{% block maincontent %}
+<h2>나는 포스팅 디테일 페이지입니다.</h2>
+{% include 'navbar.html' %}
+<article>
+  <img src="{{ posting.photo.url }}" alt="{{ posting.author.name }}이 올린 게시물 사진" />
+  <p><span>{{ posting.author.user.username }}</span>: {{ posting.content }}</p>
+  {% for comment in posting.comments.all %}
+  <p><span>{{ comment.writer.user.username }}</span>: {{ comment.content }}</p>
+  {% endfor %}
+  <form method="POST" action="{% url 'posting:comment' posting.pk %}">
+    {% csrf_token %}
+    <input type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
+    <button type="submit">등록</button>
+  </form>
+</article>
+{% endblock maincontent %}
