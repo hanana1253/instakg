@@ -9,23 +9,29 @@
 <ul class="profile_counters">
   <li>{{ profile.posts.all | length }}</li>
   <!-- relationship 모델 추가하거나 아예 get_context_data로 오버라이딩하기 -->
-  <li>{{ profile.relationship.followers | length }}</li>
-  <li>{{ profile.relationship.followings | length }}</li>
+  <li>{{ profile.relationship.followers.all | length }}</li>
+  <li>{{ profile.target_relationship.all | length }}</li>
 </ul>
 <h3>{{ profile.name }}</h3>
 <p>{{ profile.introduction }}</p>
 {% if user == profile.user %}
 <a href="{% url 'profile:edit' profile.pk %}">프로필 편집</a>
 {% else %}
-<!-- <form action="{% url 'social:follow' profile.pk %}" method="POST">
+<form action="{% url 'social:follow' profile.pk %}" method="POST">
   {% csrf_token %}
   {% if user.profile in profile.relationship.followers.all %}
   <button type="submit">팔로우 취소</button>
   {% else %}
   <button type="submit">팔로우</button>
   {% endif %}
-</form> -->
+</form>
 {% endif %}
+<hr/>
+<div class="photo_list">
+  {% for posting in profile.postings.all %}
+  <img src="{{ posting.photo.url }}" alt="사진" width="100px">
+  {% endfor %}
+</div>
 
 <!-- 게시물 article로 -->
 {% endblock maincontent %}
