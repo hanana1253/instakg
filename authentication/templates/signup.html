@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock head %}
+{% block maincontent %}
+<section class="signup">
+  <h2>나는 회원가입 페이지다</h2>
+  <p>친구들의 사진과 동영상을 보려면 가입하세요.</p>
+  <form action="{% url 'user:signup' %}">
+    {% csrf_token %}
+    <label class="a11y-hidden" for="emailAddress">이메일 주소</label>
+    <input id="emailAddress" type="email" name="user_email" />
+    <label class="a11y-hidden" for="name">성명</label>
+    <input id="name" type="text" name="name" />
+    <label class="a11y-hidden" for="userId">아이디</label>
+    <input id="userId" type="text" name="userid" />
+    <label class="a11y-hidden" for="password">비밀번호</label>
+    <input id="password" type="password" name="userpw" />
+    <button type="submit">가입</button>
+  </form>
+</section>
+<section class="login-redirect">
+  <h2>나는 로그인으로 인도하는 문이다.</h2>
+  <p>계정이 있으신가요? <a href="{% url 'user:login' %}">로그인</a></p>
+</section>
+{% endblock maincontent %}
