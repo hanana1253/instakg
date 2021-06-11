@@ -4,10 +4,11 @@
 {% block maincontent %}
 {% if user.is_authenticated %}
 <h2>나는 로그인 된 상태의 인덱스페이지이다</h2>
-
+{% include 'navbar.html' %}
+<hr>
 {% for posting in postings_list.all %}
   <article class="posting">
-    <h3>나는 {{ posting.pk }}번 아티클의 헤딩3이다</h3>
+    <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 아티클의 헤딩3이다</h3>
     <figure>
       <img src="{{ posting.photo.url }}" alt="업로드된 사진" />
       <figcaption>내용: {{ posting.content }}</figcaption>

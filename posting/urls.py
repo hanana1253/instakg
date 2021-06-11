@@ -1,6 +1,9 @@
 from django.urls import path
-from posting.views import IndexPostingsListView
+from posting.views import PostingAddView, PostingEditView
+
+app_name = 'posting'
 
 urlpatterns = [
-    path('', IndexPostingsListView.as_view(), name='index'),
+    path('new/', PostingAddView.as_view(), name='add'),
+    path('edit/<int:pk>', PostingEditView.as_view(), name='edit'),
 ]
