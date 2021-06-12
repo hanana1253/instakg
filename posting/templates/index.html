@@ -9,10 +9,8 @@
 {% for posting in postings_list.all %}
   <article class="posting">
     <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 아티클의 헤딩3이다</h3>
-    <figure>
-      <img src="{{ posting.photo.url }}" alt="업로드된 사진" />
-      <figcaption>내용: {{ posting.content }}</figcaption>
-    </figure> 
+    <a href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
+    <p><span class="username">{{ posting.author.user.username }}</span> {{ posting.content }}</p>
   </article>
 {% endfor %}
 {% else %}
