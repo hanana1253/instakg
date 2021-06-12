@@ -4,7 +4,7 @@
   "description": "## Introduction - 인스타그램 따라 만들기 프로젝트",
   "main": "index.js",
   "scripts": {
-    "sass": "sass authentication/static/sass:authentication/static/css -I sass",
+    "sass": "sass posting/static/sass:posting/static/css -I sass",
     "watch": "npm run sass -- --watch",
     "start": "live-server --open=/ | npm run watch"
   },

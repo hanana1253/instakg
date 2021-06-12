@@ -6,7 +6,9 @@ class PostingService():
 
     @staticmethod
     def find_all():
-        return Posting.objects.filter(is_deleted=False)
+        postings = Posting.objects.filter(is_deleted=False).order_by('-created_at')
+        return postings
+
 
     @staticmethod
     def add(dto: PostingDto):

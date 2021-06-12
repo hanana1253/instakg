@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}">
 {% endblock head %}
 {% block maincontent %}
 {% if user.is_authenticated %}

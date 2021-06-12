@@ -1,0 +1,10 @@
+.posting {
+  background-color: lime;
+  max-width: 80vw;
+  min-width: 300px;
+}
+.posting img {
+  width: 100%;
+}
+
+/*# sourceMappingURL=timeline.css.map */
