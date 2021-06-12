@@ -6,13 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instakilogram</title>
+  <link rel="stylesheet"  type="text/css" href="{% static 'css/style.css' %}">
   {% block head %}
   {% endblock head %}
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <h1>나는 헤더영역의 헤딩1레벨이다</h1>
+      {% block header %}
+      {% endblock header %}
     </header>
     <main class="main">
       {% block maincontent %}

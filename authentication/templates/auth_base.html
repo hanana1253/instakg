@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/authstyle.css' %}">
+{% endblock head %}
+{% block maincontent %}
+<div class="auth_container">
+  <h1 class="logo">InstaKilogram</h1>
+  <section class="post-form">
+    {% block form_section %}
+    {% endblock form_section %}
+  </section>
+  <section class="redirect">
+    {% block redirect_section %}
+    {% endblock redirect_section %}
+  </section>
+</div>
+{% endblock maincontent %}

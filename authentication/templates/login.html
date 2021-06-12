@@ -1,9 +1,6 @@
-{% extends 'base.html' %}
-{% block head %}
-{% endblock head %}
-{% block maincontent %}
-<section class="post-form">
-  <h2>나는 로그인 페이지다</h2>
+{% extends 'auth_base.html' %}
+{% block form_section %}
+  <h2 class="hidden-heading">로그인 섹션</h2>
   <form method="POST" action="{% url 'user:login' %}">
     {% csrf_token %}
     <label class="a11y-hidden">
@@ -19,9 +16,9 @@
   {% if error.state %}
   <p class="error_msg">{{ error.msg }}</p>
   {% endif %}
-</section>
-<section class="redirect">
-  <h2>나는 회원가입으로 인도하는 문이다.</h2>
+{% endblock form_section %}
+
+{% block redirect_section %}
+  <h2 class="hidden-heading">회원가입으로 이동하기</h2>
   <p>계정이 없으신가요? <a href="{% url 'user:signup' %}" title="회원가입 창으로 이동">회원가입</a></p>
-</section>
-{% endblock maincontent %}
+{% endblock redirect_section %}
