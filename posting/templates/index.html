@@ -16,16 +16,45 @@
       <a href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
       <figcaption><a class="auther-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}</figcaption>
     </figure>
-    <ul class="comments-list reset-list">
-      {% for comment in posting.comments.all %}
-      <li><a href="{% url 'user:detail' comment.writer.pk %}">{{ comment.writer.user.username }}</a>: {{ comment.content }}</li>
-      {% endfor %}
-    </ul>
-    <form method="POST" action="{% url 'posting:comment' posting.pk %}">
-      {% csrf_token %}
-      <input type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
-      <button type="submit">등록</button>
-    </form>
+    <div class="like">
+      {% if posting.like_users.all %}
+      <p>{{ posting.like_users.all | length }}명이 좋아합니다.</p>
+      {% endif %}
+      <form method="POST" action="{% url 'posting:like' posting.pk %}">
+        {% csrf_token %}
+        {% if user.profile in posting.like_users.all %}
+        <button type="submit" name="like" value="unlike">좋아요 취소</button>
+        {% else %}
+        <button type="submit" name="like" value="like">좋아요</button>
+        {% endif %}
+      </form>
+    </div>
+    <div class="comments">
+      <ul class="comments-list reset-list">
+        {% for comment in posting.comments.all %}
+        <li class="comment">
+          <a href="{% url 'user:detail' comment.writer.pk %}">{{ comment.writer.user.username }}</a>
+          <span>: {{ comment.content }}</span>
+          {% if comment.like_users.all %}
+          <p>{{ comment.like_users.all | length }}명이 좋아합니다.</p>
+          {% endif %}
+          <form method="POST" action="{% url 'posting:comment-like' comment.pk %}">
+            {% csrf_token %}
+            {% if user.profile in comment.like_users.all %}
+            <button type="submit" name="like" value="unlike">좋아요 취소</button>
+            {% else %}
+            <button type="submit" name="like" value="like">좋아요</button>
+            {% endif %}
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+      <form method="POST" action="{% url 'posting:comment' posting.pk %}">
+        {% csrf_token %}
+        <input type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
+        <button type="submit">등록</button>
+      </form>
+    </div>
   </article>
 {% endfor %}
 {% else %}

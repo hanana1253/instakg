@@ -19,3 +19,9 @@ class CommentDto():
     posting_pk: int
     writer: Profile
     content: str
+
+@dataclass
+class LikeDto():
+    target_pk: int
+    my_profile: Profile
+    action: str

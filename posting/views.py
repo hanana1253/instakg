@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View, generic
 from posting.models import Posting
 from posting.services import PostingService, CommentService
-from posting.dto import PostingDto, UpdateDto, CommentDto
+from posting.dto import LikeDto, PostingDto, UpdateDto, CommentDto
 import time
 from utils import get_time_passed
 
@@ -66,6 +66,19 @@ class PostingDeleteView(View):
         PostingService.delete(target_posting_pk)
         return redirect('index')
 
+class PostingLikeView(View):
+    def post(self, request, *args, **kwargs):
+        like_dto = self._build_like_dto(request)
+        PostingService.like(like_dto)
+        return redirect('index')
+
+    def _build_like_dto(self, request):
+        return LikeDto(
+            target_pk=self.kwargs['posting_pk'],
+            my_profile=request.user.profile,
+            action=request.POST['like']
+        )
+
 class CommentAddView(View):
     def post(self, request, *args, **kwargs):
         comment_dto = self._build_comment_dto(request)
@@ -79,3 +92,15 @@ class CommentAddView(View):
             content=request.POST['content']
         )
 
+class CommentLikeView(View):
+    def post(self, request, *args, **kwargs):
+        like_dto = self._build_like_dto(request)
+        CommentService.like(like_dto)
+        return redirect('index')
+
+    def _build_like_dto(self, request):
+        return LikeDto(
+            target_pk=self.kwargs['comment_pk'],
+            my_profile=request.user.profile,
+            action=request.POST['like']
+        )
