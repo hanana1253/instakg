@@ -4,8 +4,4 @@ __pycache__
 secrets.json
 db.sqlite3
 .vscode
-<<<<<<< HEAD
 node_modules/
-=======
-node_modules
->>>>>>> feature/crud
