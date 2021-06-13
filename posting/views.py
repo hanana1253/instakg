@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View, generic
 from posting.models import Posting
 from posting.services import PostingService
-from posting.dto import PostingDto
+from posting.dto import PostingDto, UpdateDto
 
 # Create your views here.
 class IndexTimelineView(View):
@@ -36,10 +36,20 @@ class PostingAddView(View):
 
 class PostingEditView(View):
     def get(self, request, *args, **kwargs):
-        pass
+        target_posting = PostingService.find_by_pk(kwargs['pk'])
+        context = {'posting': target_posting}
+        return render(request, 'edit.html', context)
 
     def post(self, request, *args, **kwargs):
-        pass
+        update_dto = self._build_update_dto(request.POST)
+        PostingService.update(update_dto)
+        return redirect('posting:detail', kwargs['pk'])
+
+    def _build_update_dto(self, post_data):
+        return UpdateDto(
+            posting_pk=self.kwargs['pk'],
+            content=post_data['content']
+        )
 
 class CommentAddView(View):
     def get(self, request, *args, **kwargs):

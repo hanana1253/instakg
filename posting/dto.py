@@ -9,4 +9,7 @@ class PostingDto():
     photo: File
     content: str
 
-
+@dataclass
+class UpdateDto():
+    posting_pk: int
+    content: str
