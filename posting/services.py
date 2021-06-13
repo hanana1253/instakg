@@ -1,6 +1,7 @@
 from posting.dto import PostingDto, UpdateDto
 from authentication.models import Profile
 from posting.models import Posting, Comment
+import time
 
 class PostingService():
 
@@ -16,9 +17,14 @@ class PostingService():
     @staticmethod
     def add(dto: PostingDto):
         post = Posting.objects.create(author=dto.author, photo=dto.photo, content=dto.content)
-        return {'error':{'state': False}, 'data': post}
+        return {'error':{'state': False }, 'data': post}
 
     @staticmethod
     def update(dto: UpdateDto):
-        post = Posting.objects.filter(pk=dto.posting_pk).update(content=dto.content)
-        return {'error': {'state':False}, 'data': post}
+        post = Posting.objects.filter(pk=dto.posting_pk).update(content=dto.content, updated_at=time.time())
+        return {'error': {'state': False }, 'data': post}
+    
+    @staticmethod
+    def delete(pk):
+        Posting.objects.filter(pk=pk).update(is_deleted=True)
+        return {'error': {'state': False }}

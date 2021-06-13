@@ -13,8 +13,13 @@
     <h3><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a></h3>
     {% if user == posting.author.user %}
     <a href="{% url 'posting:edit' posting.pk %}">수정하기</a>
+    <form method="POST" action="{% url 'posting:delete' posting.pk %}">
+      {% csrf_token %}
+      <button type="submit">삭제하기</button>
+    </form>
     {% endif %}
     <p><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a>: {{ posting.content }}</p>
+    <p>{{ since_created }}</p>
   </section>
   {% for comment in posting.comments.all %}
   <p><a class="author-profile" href="{% url 'user:detail' comment.writer.pk %}">{{ comment.writer.user.username }}</a>: {{ comment.content }}</p>

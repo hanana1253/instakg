@@ -3,17 +3,26 @@ from django.views import View, generic
 from posting.models import Posting
 from posting.services import PostingService
 from posting.dto import PostingDto, UpdateDto
+import time
+from utils import get_time_passed
+
 
 # Create your views here.
 class IndexTimelineView(View):
     def get(self, request, *args, **kwargs):
-        context = { 'postings_list': PostingService.find_all() }
+        context = { 'postings_list': PostingService.find_all(), 'now': -time.time() }
+        print('', (float(time.time())-float(context['postings_list'].first().created_at))//(60*60), '시간 경과')
         return render(request, 'index.html', context)
 
 class PostingDetailView(generic.DetailView):
     template_name = 'posting_detail.html'
     model = Posting
     context_object_name = 'posting'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['since_created'] = get_time_passed(context['posting'])
+        return context
 
 class PostingAddView(View):
     def get(self, request, *args, **kwargs):
@@ -50,6 +59,12 @@ class PostingEditView(View):
             posting_pk=self.kwargs['pk'],
             content=post_data['content']
         )
+
+class PostingDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        target_posting_pk = kwargs['pk']
+        PostingService.delete(target_posting_pk)
+        return redirect('index')
 
 class CommentAddView(View):
     def get(self, request, *args, **kwargs):
