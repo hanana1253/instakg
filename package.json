@@ -1,0 +1,25 @@
+{
+  "name": "instakg",
+  "version": "1.0.0",
+  "description": "## Introduction - 인스타그램 따라 만들기 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass posting/static/sass:posting/static/css -I sass",
+    "watch": "npm run sass -- --watch",
+    "start": "live-server --open=/ | npm run watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanana1253/instakg.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanana1253/instakg/issues"
+  },
+  "homepage": "https://github.com/hanana1253/instakg#readme",
+  "devDependencies": {
+    "sass": "^1.34.1"
+  }
+}

@@ -3,6 +3,8 @@
 {% endblock head %}
 {% block maincontent %}
 <h2>나는 프로필 에딧영역의 헤딩2레벨이다</h2>
+{% include 'navbar.html' %}
+
 <!-- 프로필 사진 -->
 <img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
 <h3>{{ profile.name }}</h3>

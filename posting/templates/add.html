@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block head %}
+{% endblock head %}
+{% block maincontent %}
+<h2>나는 포스팅 create 페이지</h2>
+<form method="POST" action="{% url 'posting:add' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label>사진보내기<input type="file" name="photo" /></label>
+  <label>내용<input type="text" name="content" /></label>
+  <button type="submit">등록</button>
+</form>
+{% endblock maincontent %}

@@ -1,0 +1,7 @@
+.detail {
+  background-color: purple;
+  & img {
+    max-width: 80vw;
+    min-width: 300px;
+  }
+}
