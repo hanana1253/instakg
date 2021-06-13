@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View, generic
 from posting.models import Posting
-from posting.services import PostingService
-from posting.dto import PostingDto, UpdateDto
+from posting.services import PostingService, CommentService
+from posting.dto import PostingDto, UpdateDto, CommentDto
 import time
 from utils import get_time_passed
 
@@ -67,8 +67,15 @@ class PostingDeleteView(View):
         return redirect('index')
 
 class CommentAddView(View):
-    def get(self, request, *args, **kwargs):
-        pass
-
     def post(self, request, *args, **kwargs):
-        pass
+        comment_dto = self._build_comment_dto(request)
+        CommentService.create(comment_dto)
+        return redirect('index')
+
+    def _build_comment_dto(self, request):
+        return CommentDto(
+            posting_pk=self.kwargs['posting_pk'],
+            writer=request.user.profile,
+            content=request.POST['content']
+        )
+

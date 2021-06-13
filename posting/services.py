@@ -1,4 +1,4 @@
-from posting.dto import PostingDto, UpdateDto
+from posting.dto import PostingDto, UpdateDto, CommentDto
 from authentication.models import Profile
 from posting.models import Posting, Comment
 import time
@@ -28,3 +28,14 @@ class PostingService():
     def delete(pk):
         Posting.objects.filter(pk=pk).update(is_deleted=True)
         return {'error': {'state': False }}
+
+class CommentService():
+    @staticmethod
+    def create(dto: CommentDto):
+        target_posting = Posting.objects.filter(pk=dto.posting_pk).first()
+        comment = Comment.objects.create(
+            writer=dto.writer,
+            post=target_posting,
+            content=dto.content
+        )
+        return {'error': {'state': False }, 'data': comment }

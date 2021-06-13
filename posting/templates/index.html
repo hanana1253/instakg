@@ -12,9 +12,20 @@
 {% for posting in postings_list.all %}
   <article class="posting">
     <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 아티클의 헤딩3이다</h3>
-    <h4>{{ posting.created_at }}</h4>
-    <a href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
-    <p><span class="username">{{ posting.author.user.username }}</span> {{ posting.content }}</p>
+    <figure>
+      <a href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
+      <figcaption><a class="auther-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}</figcaption>
+    </figure>
+    <ul class="comments-list reset-list">
+      {% for comment in posting.comments.all %}
+      <li><a href="{% url 'user:detail' comment.writer.pk %}">{{ comment.writer.user.username }}</a>: {{ comment.content }}</li>
+      {% endfor %}
+    </ul>
+    <form method="POST" action="{% url 'posting:comment' posting.pk %}">
+      {% csrf_token %}
+      <input type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
+      <button type="submit">등록</button>
+    </form>
   </article>
 {% endfor %}
 {% else %}
