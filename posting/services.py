@@ -1,4 +1,4 @@
-from posting.dto import PostingDto, UpdateDto
+from posting.dto import PostingDto, UpdateDto, CommentDto, LikeDto
 from authentication.models import Profile
 from posting.models import Posting, Comment
 import time
@@ -27,4 +27,33 @@ class PostingService():
     @staticmethod
     def delete(pk):
         Posting.objects.filter(pk=pk).update(is_deleted=True)
+        return {'error': {'state': False }}
+    @staticmethod
+    def like(dto: LikeDto):
+        target_posting = Posting.objects.filter(pk=dto.target_pk).first()
+        if dto.action == 'like':
+            target_posting.like_users.add(dto.my_profile)
+        else:
+            target_posting.like_users.remove(dto.my_profile)
+        return {'error': {'state': False }}
+
+
+class CommentService():
+    @staticmethod
+    def create(dto: CommentDto):
+        target_posting = Posting.objects.filter(pk=dto.posting_pk).first()
+        comment = Comment.objects.create(
+            writer=dto.writer,
+            post=target_posting,
+            content=dto.content
+        )
+        return {'error': {'state': False }, 'data': comment }
+
+    @staticmethod
+    def like(dto: LikeDto):
+        target_comment = Comment.objects.filter(pk=dto.target_pk).first()
+        if dto.action == 'like':
+            target_comment.like_users.add(dto.my_profile)
+        else:
+            target_comment.like_users.remove(dto.my_profile)
         return {'error': {'state': False }}

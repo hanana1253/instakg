@@ -1,0 +1,25 @@
+<div class="auth_container">
+  <h1 class="logo">InstaKilogram</h1>
+  <section class="post-form">
+    <h2 class="hidden-heading">로그인 섹션</h2>
+    <form method="POST" action="{% url 'user:login' %}">
+      {% csrf_token %}
+      <label class="a11y-hidden">
+        <span>아이디</span>
+        <input type="text" name="userid" />
+      </label>
+      <label class="a11y-hidden">
+        <span>비밀번호</span>
+        <input type="password" name="userpw" />
+      </label>
+      <button type="submit">로그인</button>
+    </form>
+    {% if error.state %}
+    <p class="error_msg">{{ error.msg }}</p>
+    {% endif %}
+  </section>
+  <section class="redirect">
+    <h2 class="hidden-heading">회원가입으로 이동하기</h2>
+    <p>계정이 없으신가요? <a href="{% url 'user:signup' %}" title="회원가입 창으로 이동">회원가입</a></p>
+  </section>
+</div>  

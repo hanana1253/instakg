@@ -1,24 +1,8 @@
-{% extends 'auth_base.html' %}
-{% block form_section %}
-  <h2 class="hidden-heading">로그인 섹션</h2>
-  <form method="POST" action="{% url 'user:login' %}">
-    {% csrf_token %}
-    <label class="a11y-hidden">
-      <span>아이디</span>
-      <input type="text" name="userid" />
-    </label>
-    <label class="a11y-hidden">
-      <span>비밀번호</span>
-      <input type="password" name="userpw" />
-    </label>
-    <button type="submit">로그인</button>
-  </form>
-  {% if error.state %}
-  <p class="error_msg">{{ error.msg }}</p>
-  {% endif %}
-{% endblock form_section %}
-
-{% block redirect_section %}
-  <h2 class="hidden-heading">회원가입으로 이동하기</h2>
-  <p>계정이 없으신가요? <a href="{% url 'user:signup' %}" title="회원가입 창으로 이동">회원가입</a></p>
-{% endblock redirect_section %}
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/authstyle.css' %}">
+{% endblock head %}
+{% block maincontent %}
+{% include 'login-form.html' %}
+{% endblock maincontent %}

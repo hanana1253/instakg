@@ -13,3 +13,15 @@ class PostingDto():
 class UpdateDto():
     posting_pk: int
     content: str
+
+@dataclass
+class CommentDto():
+    posting_pk: int
+    writer: Profile
+    content: str
+
+@dataclass
+class LikeDto():
+    target_pk: int
+    my_profile: Profile
+    action: str

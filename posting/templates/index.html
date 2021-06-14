@@ -11,15 +11,19 @@
 <hr>
 {% for posting in postings_list.all %}
   <article class="posting">
-    <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 아티클의 헤딩3이다</h3>
-    <h4>{{ posting.created_at }}</h4>
-    <a href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
-    <p><span class="username">{{ posting.author.user.username }}</span> {{ posting.content }}</p>
+    <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 게시물이다</h3>
+    <figure>
+      <a href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
+      <figcaption><a class="auther-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}</figcaption>
+    </figure>
+    {% include 'like.html' %}
+    {% include 'comment.html' %}
   </article>
 {% endfor %}
 {% else %}
 <h2>나는 로그인 안된 상태의 인덱스페이지이다</h2>
 <p>랄랄라라라라</p>
-<a href="{% url 'user:signup' %}" title="회원가입 창으로 이동">회원가입</a>
+<img src="https://www.instagram.com/static/images/homepage/home-phones@2x.png/9364675fb26a.png" alt="메인페이지"/>
+{% include 'login-form.html' %}
 {% endif %}
 {% endblock maincontent %}
