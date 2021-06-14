@@ -11,55 +11,19 @@
 <hr>
 {% for posting in postings_list.all %}
   <article class="posting">
-    <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 아티클의 헤딩3이다</h3>
+    <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 게시물이다</h3>
     <figure>
       <a href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
       <figcaption><a class="auther-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}</figcaption>
     </figure>
-    <div class="like">
-      {% if posting.like_users.all %}
-      <p>{{ posting.like_users.all | length }}명이 좋아합니다.</p>
-      {% endif %}
-      <form method="POST" action="{% url 'posting:like' posting.pk %}">
-        {% csrf_token %}
-        {% if user.profile in posting.like_users.all %}
-        <button type="submit" name="like" value="unlike">좋아요 취소</button>
-        {% else %}
-        <button type="submit" name="like" value="like">좋아요</button>
-        {% endif %}
-      </form>
-    </div>
-    <div class="comments">
-      <ul class="comments-list reset-list">
-        {% for comment in posting.comments.all %}
-        <li class="comment">
-          <a href="{% url 'user:detail' comment.writer.pk %}">{{ comment.writer.user.username }}</a>
-          <span>: {{ comment.content }}</span>
-          {% if comment.like_users.all %}
-          <p>{{ comment.like_users.all | length }}명이 좋아합니다.</p>
-          {% endif %}
-          <form method="POST" action="{% url 'posting:comment-like' comment.pk %}">
-            {% csrf_token %}
-            {% if user.profile in comment.like_users.all %}
-            <button type="submit" name="like" value="unlike">좋아요 취소</button>
-            {% else %}
-            <button type="submit" name="like" value="like">좋아요</button>
-            {% endif %}
-          </form>
-        </li>
-        {% endfor %}
-      </ul>
-      <form method="POST" action="{% url 'posting:comment' posting.pk %}">
-        {% csrf_token %}
-        <input type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
-        <button type="submit">등록</button>
-      </form>
-    </div>
+    {% include 'like.html' %}
+    {% include 'comment.html' %}
   </article>
 {% endfor %}
 {% else %}
 <h2>나는 로그인 안된 상태의 인덱스페이지이다</h2>
 <p>랄랄라라라라</p>
-<a href="{% url 'user:signup' %}" title="회원가입 창으로 이동">회원가입</a>
+<img src="https://www.instagram.com/static/images/homepage/home-phones@2x.png/9364675fb26a.png" alt="메인페이지"/>
+{% include 'login-form.html' %}
 {% endif %}
 {% endblock maincontent %}

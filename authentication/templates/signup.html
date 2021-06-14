@@ -1,32 +1,41 @@
-{% extends 'auth_base.html' %}
-{% block form_section %}
-  <h2 class="hidden-heading">회원가입 섹션</h2>
-  <p>친구들의 사진과 동영상을 보려면 가입하세요.</p>
-  <form method="POST" action="{% url 'user:signup' %}">
-    {% csrf_token %}
-    <label class="label">
-      <span>성명</span>
-      <input type="text" name="name" />
-    </label>
-    <label class="label">
-      <span>아이디</span>
-      <input type="text" name="userid" />
-    </label>
-    <label class="label">
-      <span>비밀번호</span>
-      <input type="password" name="userpw" />
-    </label>
-    <label class="label">
-      <span>비밀번호 확인</span>
-      <input type="password" name="userpw-check" />
-    </label>
-    <button type="submit">가입</button>
-  </form>
-  {% if error.state %}
-  <p class="error_msg">{{ error.msg }}</p>
-  {% endif %}
-{% endblock form_section %}
-{% block redirect_section %}
-  <h2 class="hidden-heading">로그인으로 이동</h2>
-  <p>계정이 있으신가요? <a href="{% url 'user:login' %}" title="로그인 창으로 이동">로그인</a></p>
-{% endblock redirect_section %}
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/authstyle.css' %}">
+{% endblock head %}
+{% block maincontent %}
+<div class="auth_container">
+  <h1 class="logo">InstaKilogram</h1>
+  <section class="post-form">
+    <h2 class="hidden-heading">회원가입 섹션</h2>
+    <p>친구들의 사진과 동영상을 보려면 가입하세요.</p>
+    <form method="POST" action="{% url 'user:signup' %}">
+      {% csrf_token %}
+      <label class="label">
+        <span>성명</span>
+        <input type="text" name="name" />
+      </label>
+      <label class="label">
+        <span>아이디</span>
+        <input type="text" name="userid" />
+      </label>
+      <label class="label">
+        <span>비밀번호</span>
+        <input type="password" name="userpw" />
+      </label>
+      <label class="label">
+        <span>비밀번호 확인</span>
+        <input type="password" name="userpw-check" />
+      </label>
+      <button type="submit">가입</button>
+    </form>
+    {% if error.state %}
+    <p class="error_msg">{{ error.msg }}</p>
+    {% endif %}
+  </section>
+  <section class="redirect">
+    <h2 class="hidden-heading">로그인으로 이동</h2>
+    <p>계정이 있으신가요? <a href="{% url 'user:login' %}" title="로그인 창으로 이동">로그인</a></p>
+  </section>
+</div>
+{% endblock maincontent %}

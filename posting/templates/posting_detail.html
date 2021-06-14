@@ -21,15 +21,7 @@
     <p><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a>: {{ posting.content }}</p>
     <p>{{ since_created }}</p>
   </section>
-  <ul class="comments-list reset-list">
-  {% for comment in posting.comments.all %}
-  <li><a class="author-profile" href="{% url 'user:detail' comment.writer.pk %}">{{ comment.writer.user.username }}</a>: {{ comment.content }}</li>
-  {% endfor %}
-  </ul>
-  <form method="POST" action="{% url 'posting:comment' posting.pk %}">
-    {% csrf_token %}
-    <input type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
-    <button type="submit">등록</button>
-  </form>
+  {% include 'like.html' %}
+  {% include 'comment.html' %}
 </article>
 {% endblock maincontent %}
