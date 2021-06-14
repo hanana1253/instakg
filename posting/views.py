@@ -96,6 +96,7 @@ class CommentLikeView(View):
     def post(self, request, *args, **kwargs):
         like_dto = self._build_like_dto(request)
         CommentService.like(like_dto)
+        print(' Did it work?')
         return redirect('index')
 
     def _build_like_dto(self, request):

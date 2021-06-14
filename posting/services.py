@@ -55,5 +55,5 @@ class CommentService():
         if dto.action == 'like':
             target_comment.like_users.add(dto.my_profile)
         else:
-            target_comment.like_user.remove(dto.my_profile)
+            target_comment.like_users.remove(dto.my_profile)
         return {'error': {'state': False }}
