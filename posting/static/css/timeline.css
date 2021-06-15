@@ -1,9 +1,19 @@
 .posting {
-  background-color: lime;
   max-width: 80vw;
   min-width: 300px;
 }
-.posting img {
+.posting h3 {
+  color: red;
+}
+.posting .author-profile {
+  background-color: yellow;
+}
+.posting .author-profile .profile-img {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.posting .posting-img {
   width: 100%;
 }
 

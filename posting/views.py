@@ -76,7 +76,6 @@ class PostingLikeView(View):
         return LikeDto(
             target_pk=self.kwargs['posting_pk'],
             my_profile=request.user.profile,
-            action=request.POST['like']
         )
 
 class CommentAddView(View):
@@ -103,5 +102,4 @@ class CommentLikeView(View):
         return LikeDto(
             target_pk=self.kwargs['comment_pk'],
             my_profile=request.user.profile,
-            action=request.POST['like']
         )

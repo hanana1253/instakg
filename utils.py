@@ -22,4 +22,7 @@ def get_time_passed(object):
         return str(time_passed//(60*60)) + '시간 전'
     if time_passed//(60*60*24) < 30:
         return str(time_passed//(60*60*24)) + '일 전'
-    
+    if time_passed//(60*60*24*30) < 12:
+        return str(time_passed//(60*60*24*30)) + '달 전'
+    else:
+        return '오래 전'

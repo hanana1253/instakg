@@ -1,8 +1,20 @@
 .posting {
-  background-color: lime;
   max-width: 80vw;
   min-width: 300px;
-  & img {
+  & h3 {
+    color: red;
+  }
+  .author-profile {
+    background-color: yellow;
+    & .profile-img {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+    }
+  }
+  & .posting-img {
     width: 100%;
   }
+  
 }
+

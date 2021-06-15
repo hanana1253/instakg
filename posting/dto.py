@@ -24,4 +24,3 @@ class CommentDto():
 class LikeDto():
     target_pk: int
     my_profile: Profile
-    action: str
