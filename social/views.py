@@ -8,7 +8,7 @@ class FollowView(View):
     def post(self, request, *args, **kwargs):
         follow_dto = self._build_follow_dto(request)
         FollowService.toggle(follow_dto)
-        return redirect('profile:detail', kwargs['pk'])
+        return redirect('user:detail', kwargs['pk'])
 
     def _build_follow_dto(self, request):
         return FollowDto(

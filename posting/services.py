@@ -31,7 +31,7 @@ class PostingService():
     @staticmethod
     def like(dto: LikeDto):
         target_posting = Posting.objects.filter(pk=dto.target_pk).first()
-        if dto.action == 'like':
+        if dto.my_profile not in target_posting.like_users.all():
             target_posting.like_users.add(dto.my_profile)
         else:
             target_posting.like_users.remove(dto.my_profile)
@@ -52,7 +52,7 @@ class CommentService():
     @staticmethod
     def like(dto: LikeDto):
         target_comment = Comment.objects.filter(pk=dto.target_pk).first()
-        if dto.action == 'like':
+        if dto.my_profile not in target_comment.like_users.all():
             target_comment.like_users.add(dto.my_profile)
         else:
             target_comment.like_users.remove(dto.my_profile)

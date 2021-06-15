@@ -5,9 +5,9 @@
   <form method="POST" action="{% url 'posting:like' posting.pk %}">
     {% csrf_token %}
     {% if user.profile in posting.like_users.all %}
-    <button type="submit" name="like" value="unlike">좋아요 취소</button>
+    <button type="submit">좋아요 취소</button>
     {% else %}
-    <button type="submit" name="like" value="like">좋아요</button>
+    <button type="submit">좋아요</button>
     {% endif %}
   </form>
 </div>
