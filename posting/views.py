@@ -13,8 +13,7 @@ from utils import get_time_passed
 # Create your views here.
 class IndexTimelineView(View):
     def get(self, request, *args, **kwargs):
-        context = { 'postings_list': PostingService.find_all(), 'now': -time.time() }
-        print('', (float(time.time())-float(context['postings_list'].first().created_at))//(60*60), '시간 경과')
+        context = { 'postings_list': PostingService.find_all(request.user.profile), 'now': -time.time() }
         return render(request, 'index.html', context)
 
 class PostingDetailView(generic.DetailView):

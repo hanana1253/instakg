@@ -6,8 +6,8 @@ import time
 class PostingService():
 
     @staticmethod
-    def find_all():
-        postings = Posting.objects.filter(is_deleted=False).order_by('-created_at')
+    def find_all(my_profile):
+        postings = Posting.objects.filter(is_deleted=False).filter(author__relationship__followers__in=[my_profile]).order_by('-created_at')
         return postings
 
     @staticmethod
