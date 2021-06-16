@@ -9,6 +9,8 @@ class FollowService():
 
         if my_profile in target_profile.relationship.followers.all():
             target_profile.relationship.followers.remove(my_profile)
+            return {'count': len(target_profile.relationship.followers.all()), 'button_msg': '팔로우'}
         else:
             target_profile.relationship.followers.add(my_profile)
-        return
+            return {'count': len(target_profile.relationship.followers.all()), 'button_msg': '팔로우 취소'}
+            

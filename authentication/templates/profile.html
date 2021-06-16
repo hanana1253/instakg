@@ -8,18 +8,16 @@
 <img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
 <h3>@{{ profile.user.username }}</h3>
 <ul class="profile_counters">
-  <li>{{ profile.posts.all | length }}</li>
-  <!-- relationship 모델 추가하거나 아예 get_context_data로 오버라이딩하기 -->
-  <li>{{ profile.relationship.followers.all | length }}</li>
-  <li>{{ profile.target_relationship.all | length }}</li>
+  <li class="post-count">{{ profile.posts.all | length }}</li>
+  <li class="followers-count">{{ profile.relationship.followers.all | length }}</li>
+  <li class="following-count">{{ profile.target_relationship.all | length }}</li>
 </ul>
 <h3>{{ profile.name }}</h3>
 <p>{{ profile.introduction }}</p>
 {% if user == profile.user %}
 <a href="{% url 'user:edit' profile.pk %}">프로필 편집</a>
 {% else %}
-<form action="{% url 'social:follow' profile.pk %}" method="POST">
-  {% csrf_token %}
+<form class="follow-form" action="{% url 'social:follow' profile.pk %}" method="POST">
   {% if user.profile in profile.relationship.followers.all %}
   <button type="submit">팔로우 취소</button>
   {% else %}
@@ -33,4 +31,50 @@
   <img src="{{ posting.photo.url }}" alt="사진" width="100px">
   {% endfor %}
 </div>
+<script type="text/javascript">
+  const $follow_form = document.querySelector('.follow-form')
+
+  const toggleFollow = eventtarget => {
+    console.log('toggleFollow호출 성공')
+    const csrftoken = getCookie('csrftoken');
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    fetch("{% url 'social:follow' profile.pk %}", {
+      method: "POST",
+      headers: {
+          "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({
+          'msg': "Here's my posted data!"
+      })
+    }).then(res=>{
+      return res.json();
+    }).then(data => {
+      console.log(data);
+      eventtarget.querySelector('button').textContent = data['button_msg'];
+      document.querySelector('.followers-count').textContent = data['count'];
+    }).catch(() => {
+      console.error("Errororroroor", error);
+    })
+  }
+
+  $follow_form.onsubmit = e => {
+    e.preventDefault()
+    console.log('onsubmit까진 잘된다')
+    toggleFollow(e.target)
+  }
+</script>
 {% endblock maincontent %}
