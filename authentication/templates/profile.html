@@ -1,34 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block head %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock head %}
+{% block header %}
+  <h1 class="logo">InstaKilogram</h1>
+{% endblock header %}
 {% block maincontent %}
-<h2>나는 프로필 메인영역의 헤딩2레벨이다</h2>
 {% include 'navbar.html' %}
 <!-- 프로필 사진 -->
-<img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
-<h3>@{{ profile.user.username }}</h3>
-<ul class="profile_counters">
-  <li class="post-count">{{ profile.posts.all | length }}</li>
-  <li class="followers-count">{{ profile.relationship.followers.all | length }}</li>
-  <li class="following-count">{{ profile.target_relationship.all | length }}</li>
-</ul>
-<h3>{{ profile.name }}</h3>
-<p>{{ profile.introduction }}</p>
-{% if user == profile.user %}
-<a href="{% url 'user:edit' profile.pk %}">프로필 편집</a>
-{% else %}
-<form class="follow-form" action="{% url 'social:follow' profile.pk %}" method="POST">
-  {% if user.profile in profile.relationship.followers.all %}
-  <button type="submit">팔로우 취소</button>
+<div class="profile">
+  <img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
+  <h3 class="profile-username">@{{ profile.user.username }}</h3>
+  <ul class="profile-counters reset-list">
+    <li class="post-count">게시물 <span>{{ profile.posts.all | length }}</span></li>
+    <li class="followers-count">팔로워 <span>{{ profile.relationship.followers.all | length }}</span></li>
+    <li class="following-count">팔로우 <span>{{ profile.target_relationship.all | length }}</span></li>
+  </ul>
+  <h3>{{ profile.name }}</h3>
+  <p>{{ profile.introduction }}</p>
+  {% if user == profile.user %}
+  <a href="{% url 'user:edit' profile.pk %}">프로필 편집</a>
   {% else %}
-  <button type="submit">팔로우</button>
+  <form class="follow-form" action="{% url 'social:follow' profile.pk %}" method="POST">
+    {% if user.profile in profile.relationship.followers.all %}
+    <button type="submit">팔로우 취소</button>
+    {% else %}
+    <button type="submit">팔로우</button>
+    {% endif %}
+  </form>
   {% endif %}
-</form>
-{% endif %}
-<hr/>
-<div class="photo_list">
+</div>
+<div class="photo-list">
   {% for posting in profile.postings.all %}
-  <img src="{{ posting.photo.url }}" alt="사진" width="100px">
+  <img src="{{ posting.photo.url }}" alt="사진" />
   {% endfor %}
 </div>
 <script type="text/javascript">

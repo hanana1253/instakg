@@ -1,62 +1,3 @@
-body {
-  margin: 0;
-}
-.container {
-  padding-top: 10vh;
-}
-.reset-list {
-  padding-left: 0;
-  list-style-type: none;
-  margin: 0;
-}
-a {
-  text-decoration: none;
-  color: inherit;
-  font-weight: 550;
-}
-.header {
-  background-color: #fff; 
-  height: 10vh;
-  position: fixed;
-  width: 100vw;
-  top: 0;
-  border-bottom: 1px solid #bbb;
-}
-.logo {
-  position: relative;
-  max-width: 300px;
-  height: 10vh;
-  overflow: hidden;
-  margin: 0 auto;
-}
-.logo::after{
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: url(../logo.png) no-repeat center/contain, #fff;  
-}
-
-.navbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 10vh;
-  & ul {
-    display: flex;
-    background-color: #fefefe;
-    height: inherit;
-  }
-  & li {
-    text-align: center;
-    flex: 1 1 0px;
-    border: 1px solid #bbb;
-  }
-}
-
 .posting {  
   background-color: #fff;
   min-width: 30vw;
@@ -64,11 +5,7 @@ a {
   margin: 0 auto;
   border: 1px solid #bbb;
   border-radius: 0.5%;
-  & h3 {
-    color: red;
-  }
-  .author-profile {
-    margin: 0 1vw;
+  & .author-profile {
     padding: 1vw;
     & .profile-img {
       display: inline-block;
@@ -78,9 +15,8 @@ a {
     }
   }
   & .posting-detail {
-    padding: 0 auto;
     & a, img {
-      width: 100%
+      width: 100%;
     }
     & p {
       display: inline-block;
@@ -89,7 +25,6 @@ a {
 }
 
 .comments-list {
-  background-color: gray;
   & form {
     display: inline;
   }
