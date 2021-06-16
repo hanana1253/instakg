@@ -85,14 +85,16 @@ class PostingLikeView(View):
 class CommentAddView(View):
     def post(self, request, *args, **kwargs):
         comment_dto = self._build_comment_dto(request)
-        CommentService.create(comment_dto)
-        return redirect('index')
+        comment_data = CommentService.create(comment_dto)
+        print(comment_data)
+        print(json.loads(request.body))
+        return JsonResponse(comment_data)
 
     def _build_comment_dto(self, request):
         return CommentDto(
             posting_pk=self.kwargs['posting_pk'],
             writer=request.user.profile,
-            content=request.POST['content']
+            content=json.loads(request.body)['new_comment']
         )
 
 class CommentLikeView(View):

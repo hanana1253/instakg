@@ -21,9 +21,4 @@
     {% endfor %}
   </ul>
   {% endif %}
-  <form method="POST" action="{% url 'posting:comment' posting.pk %}">
-    {% csrf_token %}
-    <input type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
-    <button type="submit">등록</button>
-  </form>
 </div>

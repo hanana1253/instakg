@@ -2,14 +2,14 @@
   color: red;
 }
 .posting .author-profile {
-  background-color: yellow;
+  background-color: blue;
 }
 .posting .author-profile .profile-img {
   display: inline-block;
   width: 100px;
   height: 100px;
 }
-.posting .posting-img {
+.posting .posting-detail .posting-img > img {
   max-width: 80vw;
   min-width: 300px;
 }

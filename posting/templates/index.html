@@ -16,12 +16,12 @@
       <img class="profile-img" src="{{ posting.author.profile_img.url }}" alt="글쓴이 프로필사진"/>
       <a href="{% url 'user:detail' posting.author.pk %}"><span>{{ posting.author.user.username }}</span></a>
     </div>
-    <figure>
+    <div class="posting-detail">
       <a class="posting-img" href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
-      <figcaption><a class="auther-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}</figcaption>
-    </figure>
-    {% include 'like.html' %}
-    {% include 'comment.html' %}
+      {% include 'like.html' %}
+      <a class="author-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}
+      {% include 'comment.html' %}
+    </div>
   </article>
 {% endfor %}
 {% else %}

@@ -49,7 +49,12 @@ class CommentService():
             post=target_posting,
             content=dto.content
         )
-        return {'error': {'state': False }, 'data': comment }
+        return {
+            'user_pk': comment.writer.pk, 
+            'comment': comment.content, 
+            'username': comment.writer.user.username, 
+            'comment_pk': comment.pk 
+            }
 
     @staticmethod
     def like(dto: LikeDto):
