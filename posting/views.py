@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import render, redirect
 from django.views import View, generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from posting.models import Posting
 from posting.services import PostingService, CommentService
 from posting.dto import LikeDto, PostingDto, UpdateDto, CommentDto
@@ -12,8 +14,13 @@ from utils import get_time_passed
 
 # Create your views here.
 class IndexTimelineView(View):
+
     def get(self, request, *args, **kwargs):
-        context = { 'postings_list': PostingService.find_all(request.user.profile), 'now': -time.time() }
+        try:
+            postings_list = PostingService.find_all(request.user.profile)
+        except:
+            postings_list = None
+        context = { 'postings_list': postings_list, 'now': -time.time() }
         return render(request, 'index.html', context)
 
 class PostingDetailView(generic.DetailView):

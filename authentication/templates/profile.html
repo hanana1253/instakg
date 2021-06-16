@@ -33,7 +33,10 @@
 </div>
 <div class="photo-list">
   {% for posting in profile.postings.all %}
+  {% if posting.is_deleted %}
+  {% else %}
   <img src="{{ posting.photo.url }}" alt="사진" />
+  {% endif %}
   {% endfor %}
 </div>
 <script type="text/javascript">
@@ -70,7 +73,7 @@
     }).then(data => {
       console.log(data);
       eventtarget.querySelector('button').textContent = data['button_msg'];
-      document.querySelector('.followers-count').textContent = data['count'];
+      document.querySelector('.followers-count').innerHTML = `팔로워 <span>${data['count']}</span>`;
     }).catch(() => {
       console.error("Errororroroor", error);
     })

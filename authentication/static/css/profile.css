@@ -15,8 +15,8 @@
   grid-template-areas: "img img username username follow-btn" "img img counters counters counters" "img img nickname nickname ." "img img description description .";
 }
 .profile img {
-  width: 90%;
-  height: auto;
+  width: 20vw;
+  height: 20vw;
   border-radius: 50%;
   grid-area: img;
   justify-self: center;

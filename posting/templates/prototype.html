@@ -5,234 +5,46 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instakilogram</title>
-  <link rel="stylesheet"  type="text/css" href="/posting/static/css/style.css">
+  <link rel="stylesheet"  type="text/css" href="/static/css/style.css">
   
-<link rel="stylesheet" type="text/css" href="/posting/static/css/detail.css">
+<link rel="stylesheet" type="text/css" href="/static/css/timeline.css">
 
 </head>
 <body>
   <div class="container">
     <header class="header">
       
-      
+  <h1 class="logo">InstaKilogram</h1>
+
     </header>
     <main class="main">
       
-<nav class="navbar">
-  <ul class="reset-list">
-    <li><a href="/">홈화면</a></li>
-    <li><a href="/">검색</a></li>
-    <li><a href="/posting/new/">추가</a></li>
-    <li><a href="/">알림</a></li>
-    <li><a href="/profile/5/">마이페이지</a></li>
-  </ul>
-</nav>
-<article class="detail">
-  <img src="/media/posting_pics/hanana1253.jpeg" alt="이한결이 올린 게시물 사진" />
-  <section class="detail-desc">
-    <h3><a class="author-profile" href="/profile/1/">hanana1253</a></h3>
+<img src="https://www.instagram.com/static/images/homepage/home-phones@2x.png/9364675fb26a.png" alt="메인페이지"/>
+<div class="auth_container">
+  <h1 class="logo">InstaKilogram</h1>
+  <section class="post-form">
+    <h2 class="hidden-heading">로그인 섹션</h2>
+    <form method="POST" action="/profile/login/">
+      <input type="hidden" name="csrfmiddlewaretoken" value="stpXkDSu4jYPeVeUEnJHbWWzsktGKgR8RPtfOPbp6DnIhg2vkbNwH0v1Z9EpgDlu">
+      <label class="a11y-hidden">
+        <span>아이디</span>
+        <input type="text" name="userid" />
+      </label>
+      <label class="a11y-hidden">
+        <span>비밀번호</span>
+        <input type="password" name="userpw" />
+      </label>
+      <button type="submit">로그인</button>
+    </form>
     
-    <p><a class="author-profile" href="/profile/1/">hanana1253</a>: 하나나의 사진입니다.</p>
-    <p>6일 전</p>
   </section>
-  <form class="like-form" method="POST" action="/posting/like/1">
-    <p>좋아요 <span class="like-count">1</span>개</p>
-    
-    <button type="submit">좋아요</button>
-    
-  </form>
-<script type="text/javascript">
-const $like_form = document.querySelector('.like-form')
+  <section class="redirect">
+    <h2 class="hidden-heading">회원가입으로 이동하기</h2>
+    <p>계정이 없으신가요? <a href="/profile/signup/" title="회원가입 창으로 이동">회원가입</a></p>
+  </section>
+</div>  
 
-const toggleLike = eventtarget => {
-  console.log('toggleLike호출도 잘된다')
-  const csrftoken = getCookie('csrftoken');
-  function getCookie(name) {
-      let cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          const cookies = document.cookie.split(';');
-          for (let i = 0; i < cookies.length; i++) {
-              const cookie = cookies[i].trim();
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
-      }
-      return cookieValue;
-  }
-  fetch("/posting/like/1", {
-    method: "POST",
-    headers: {
-        "X-CSRFToken": csrftoken,
-    },
-    body: JSON.stringify({
-        'msg': "Here's my posted data!"
-    })
-  }).then(res=>{
-    return res.json();
-  }).then(data => {
-    console.log(data);
-    eventtarget.querySelector('button').textContent = data['button_msg'];
-    eventtarget.querySelector('.like-count').textContent = data['count'];
-  }).catch(() => {
-    console.error("Errororroroor", error);
-  })
-}
 
-$like_form.onsubmit = e => {
-  e.preventDefault()
-  console.log('onsubmit까진 잘된다')
-  toggleLike(e.target)
-}
-</script>
-  <div class="comments">
-  
-  <ul class="comments-list reset-list">
-    
-    <li class="comment">
-      <a href="/profile/5/">test04</a>
-      <span> 댓글아 달려라</span>
-      
-      <p>1명이 좋아합니다.</p>
-      
-      <form method="POST" action="/posting/commentlike/2">
-        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
-        
-        <button type="submit" name="like" value="unlike">좋아요 취소</button>
-        
-      </form>
-    </li>
-    
-    <li class="comment">
-      <a href="/profile/5/">test04</a>
-      <span> 랄랄라</span>
-      
-      <form method="POST" action="/posting/commentlike/4">
-        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
-        
-        <button type="submit" name="like" value="like">좋아요</button>
-        
-      </form>
-    </li>
-    
-    <li class="comment">
-      <a href="/profile/5/">test04</a>
-      <span> 랄랄라</span>
-      
-      <form method="POST" action="/posting/commentlike/5">
-        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
-        
-        <button type="submit" name="like" value="like">좋아요</button>
-        
-      </form>
-    </li>
-    
-    <li class="comment">
-      <a href="/profile/5/">test04</a>
-      <span> 랄랄라</span>
-      
-      <form method="POST" action="/posting/commentlike/6">
-        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
-        
-        <button type="submit" name="like" value="like">좋아요</button>
-        
-      </form>
-    </li>
-    
-    <li class="comment">
-      <a href="/profile/5/">test04</a>
-      <span> ㅇㅇㅇ</span>
-      
-      <form method="POST" action="/posting/commentlike/18">
-        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
-        
-        <button type="submit" name="like" value="like">좋아요</button>
-        
-      </form>
-    </li>
-    
-    <li class="comment">
-      <a href="/profile/5/">test04</a>
-      <span> 댓글이달립니다</span>
-      
-      <form method="POST" action="/posting/commentlike/20">
-        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
-        
-        <button type="submit" name="like" value="like">좋아요</button>
-        
-      </form>
-    </li>
-    
-  </ul>
-  
-</div>
-  <form class="comment-form" method="POST" action="/posting/comment/1">
-  <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
-  <input class="comment-input" type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
-  <button type="submit">등록</button>
-</form>
-<script type="text/javascript">
-  let $comment_form = document.querySelector('.comment-form')
-  let $comment_input = document.querySelector('.comment-input')
-  let $comments_list = document.querySelector('.comments-list')
-
-  const createComment = eventtarget => {
-    console.log('이벤트 콜백 호출 잘된다')
-    const csrftoken = getCookie('csrftoken');
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    fetch("/posting/comment/1", {
-      method: "POST",
-      headers: {
-          "X-CSRFToken": csrftoken,
-      },
-      body: JSON.stringify({
-          'new_comment': $comment_input.value
-      })
-    }).then(res=>{
-      return res.json();
-    }).then(data => {
-      console.log(data);
-      const comment_data = {
-        'username': data['username'],
-        'comment': data['comment'],
-        'user_pk': data['user_pk']
-      }
-      const $new_comment = document.createElement("li");
-      $new_comment.innerHTML = `<a href="/profile/${comment_data['user_pk']}/">${comment_data['username']}</a>
-                <span>: ${comment_data['comment']}</span>
-                <form method="POST" action="/posting/commentlike/${data['comment_pk']}">
-                  <input type="hidden" name="csrfmiddlewaretoken" value="8Plv6GwJpNkBipgjfzx9yNg9BOwbj1bV9bpmoUjM7dHthiTnNhgVC1138Qs0rUcu">
-                  <button type="submit" name="like" value="like">좋아요</button>
-                </form>`
-      $comments_list.appendChild($new_comment)
-    }).catch(() => {
-      console.error("Errororroroor", error);
-    })
-  }
-
-  $comment_form.onsubmit = e => {
-    e.preventDefault()
-    console.log('onsubmit까진 잘된다')
-    createComment(e.target)
-  }
-</script>
-</article>
 
     </main>
   </div>

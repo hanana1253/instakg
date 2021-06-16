@@ -21,7 +21,8 @@ class UserService():
 
         user = User.objects.create_user(username=dto.userid, password=dto.userpw)
         profile = Profile.objects.create(user=user, name=dto.name)
-        Relationship.objects.create(profile=profile)
+        relationship = Relationship.objects.create(profile=profile)
+        relationship.followers.add(profile)
         return build_success_data(user)
 
     def login(dto: LoginDto):

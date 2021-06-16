@@ -17,7 +17,7 @@
       <button type="submit">삭제하기</button>
     </form>
     {% endif %}
-    <p><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a>: {{ posting.content }}</p>
+    <p><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}</p>
     <p>{{ since_created }}</p>
   </section>
   {% include 'like.html' %}

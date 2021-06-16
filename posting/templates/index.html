@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
+{% if user.is_authenticated %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}">
+{% else %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/unauth_style.css' %}">
+{% endif %}
 {% endblock head %}
 {% block header %}
   <h1 class="logo">InstaKilogram</h1>
@@ -24,8 +28,6 @@
   </article>
 {% endfor %}
 {% else %}
-<h2>나는 로그인 안된 상태의 인덱스페이지이다</h2>
-<p>랄랄라라라라</p>
 <img src="https://www.instagram.com/static/images/homepage/home-phones@2x.png/9364675fb26a.png" alt="메인페이지"/>
 {% include 'login-form.html' %}
 {% endif %}

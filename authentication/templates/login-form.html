@@ -1,14 +1,14 @@
-<div class="auth_container">
+<div class="auth-container">
   <h1 class="logo">InstaKilogram</h1>
   <section class="post-form">
     <h2 class="hidden-heading">로그인 섹션</h2>
     <form method="POST" action="{% url 'user:login' %}">
       {% csrf_token %}
-      <label class="a11y-hidden">
+      <label>
         <span>아이디</span>
         <input type="text" name="userid" />
       </label>
-      <label class="a11y-hidden">
+      <label>
         <span>비밀번호</span>
         <input type="password" name="userpw" />
       </label>

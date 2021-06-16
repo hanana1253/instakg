@@ -13,8 +13,10 @@
 <body>
   <div class="container">
     <header class="header">
+      <a href="{% url 'index' %}" alt="홈화면">
       {% block header %}
       {% endblock header %}
+      </a>
     </header>
     <main class="main">
       {% block maincontent %}

@@ -26,6 +26,9 @@
   }
   & .comments {
     grid-area: comments;
+    & li >  {
+      background-color: yellow;
+    }
   }
   & .comment-form {
     grid-area: comment_form;

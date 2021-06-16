@@ -16,7 +16,7 @@ class ProfileDetailView(generic.DetailView):
 
 class ProfileEditView(View):
     def get(self, request, *args, **kwargs):
-        context = {'profile': Profile.objects.filter(pk=1).first()}
+        context = {'profile': Profile.objects.filter(pk=request.user.profile.pk).first()}
         return render(request, 'profile_edit.html', context)
 
     def post(self, request, *args, **kwargs):
