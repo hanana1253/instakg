@@ -6,8 +6,8 @@ import time
 class PostingService():
 
     @staticmethod
-    def find_all():
-        postings = Posting.objects.filter(is_deleted=False).order_by('-created_at')
+    def find_all(my_profile):
+        postings = Posting.objects.filter(is_deleted=False).filter(author__relationship__followers__in=[my_profile]).order_by('-created_at')
         return postings
 
     @staticmethod
@@ -31,12 +31,14 @@ class PostingService():
     @staticmethod
     def like(dto: LikeDto):
         target_posting = Posting.objects.filter(pk=dto.target_pk).first()
-        if dto.action == 'like':
+        if dto.my_profile not in target_posting.like_users.all():
             target_posting.like_users.add(dto.my_profile)
+            like_count = len(target_posting.like_users.all())
+            return {'count': like_count, 'button_msg': '좋아요 취소'}
         else:
             target_posting.like_users.remove(dto.my_profile)
-        return {'error': {'state': False }}
-
+            like_count = len(target_posting.like_users.all())
+            return {'count': like_count, 'button_msg': '좋아요'}
 
 class CommentService():
     @staticmethod
@@ -47,13 +49,18 @@ class CommentService():
             post=target_posting,
             content=dto.content
         )
-        return {'error': {'state': False }, 'data': comment }
+        return {
+            'user_pk': comment.writer.pk, 
+            'comment': comment.content, 
+            'username': comment.writer.user.username, 
+            'comment_pk': comment.pk 
+            }
 
     @staticmethod
     def like(dto: LikeDto):
         target_comment = Comment.objects.filter(pk=dto.target_pk).first()
-        if dto.action == 'like':
+        if dto.my_profile not in target_comment.like_users.all():
             target_comment.like_users.add(dto.my_profile)
         else:
             target_comment.like_users.remove(dto.my_profile)
-        return {'error': {'state': False }}
+        return {'error': {'state': False } }

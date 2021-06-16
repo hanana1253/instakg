@@ -1,0 +1,64 @@
+<form class="comment-form" method="POST" action="{% url 'posting:comment' posting.pk %}">
+  {% csrf_token %}
+  <input class="comment-input" type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
+  <button type="submit">등록</button>
+</form>
+<script type="text/javascript">
+  let $comment_form = document.querySelector('.comment-form')
+  let $comment_input = document.querySelector('.comment-input')
+  let $comments_list = document.querySelector('.comments-list')
+
+  const createComment = eventtarget => {
+    console.log('이벤트 콜백 호출 잘된다')
+    const csrftoken = getCookie('csrftoken');
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    fetch("{% url 'posting:comment' posting.pk %}", {
+      method: "POST",
+      headers: {
+          "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({
+          'new_comment': $comment_input.value
+      })
+    }).then(res=>{
+      return res.json();
+    }).then(data => {
+      console.log(data);
+      const comment_data = {
+        'username': data['username'],
+        'comment': data['comment'],
+        'user_pk': data['user_pk']
+      }
+      const $new_comment = document.createElement("li");
+      $new_comment.innerHTML = `<a href="/profile/${comment_data['user_pk']}/">${comment_data['username']}</a>
+                <span>: ${comment_data['comment']}</span>
+                <form method="POST" action="/posting/commentlike/${data['comment_pk']}">
+                  <input type="hidden" name="csrfmiddlewaretoken" value="8Plv6GwJpNkBipgjfzx9yNg9BOwbj1bV9bpmoUjM7dHthiTnNhgVC1138Qs0rUcu">
+                  <button type="submit" name="like" value="like">좋아요</button>
+                </form>`
+      $comments_list.appendChild($new_comment)
+    }).catch(() => {
+      console.error("Errororroroor", error);
+    })
+  }
+
+  $comment_form.onsubmit = e => {
+    e.preventDefault()
+    console.log('onsubmit까진 잘된다')
+    createComment(e.target)
+  }
+</script>

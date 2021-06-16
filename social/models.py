@@ -5,3 +5,4 @@ from authentication.models import Profile
 class Relationship(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='relationship')
     followers = models.ManyToManyField(Profile, related_name='target_relationship', blank=True)
+

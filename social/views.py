@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.http.response import JsonResponse
+from django.http import JsonResponse
 from django.views import View
 from .dto import FollowDto
 from social.services import FollowService
@@ -7,8 +8,8 @@ from social.services import FollowService
 class FollowView(View):
     def post(self, request, *args, **kwargs):
         follow_dto = self._build_follow_dto(request)
-        FollowService.toggle(follow_dto)
-        return redirect('profile:detail', kwargs['pk'])
+        follow_data = FollowService.toggle(follow_dto)
+        return JsonResponse(follow_data)
 
     def _build_follow_dto(self, request):
         return FollowDto(

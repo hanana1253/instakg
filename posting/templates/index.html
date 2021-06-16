@@ -12,12 +12,16 @@
 {% for posting in postings_list.all %}
   <article class="posting">
     <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 게시물이다</h3>
-    <figure>
-      <a href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
-      <figcaption><a class="auther-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}</figcaption>
-    </figure>
-    {% include 'like.html' %}
-    {% include 'comment.html' %}
+    <div class="author-profile">
+      <img class="profile-img" src="{{ posting.author.profile_img.url }}" alt="글쓴이 프로필사진"/>
+      <a href="{% url 'user:detail' posting.author.pk %}"><span>{{ posting.author.user.username }}</span></a>
+    </div>
+    <div class="posting-detail">
+      <a class="posting-img" href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
+      {% include 'like.html' %}
+      <a class="author-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}
+      {% include 'comment.html' %}
+    </div>
   </article>
 {% endfor %}
 {% else %}
@@ -26,4 +30,5 @@
 <img src="https://www.instagram.com/static/images/homepage/home-phones@2x.png/9364675fb26a.png" alt="메인페이지"/>
 {% include 'login-form.html' %}
 {% endif %}
+
 {% endblock maincontent %}

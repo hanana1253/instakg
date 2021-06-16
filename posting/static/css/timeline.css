@@ -1,10 +1,17 @@
-.posting {
-  background-color: lime;
+.posting h3 {
+  color: red;
+}
+.posting .author-profile {
+  background-color: blue;
+}
+.posting .author-profile .profile-img {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+.posting .posting-detail .posting-img > img {
   max-width: 80vw;
   min-width: 300px;
-}
-.posting img {
-  width: 100%;
 }
 
 /*# sourceMappingURL=timeline.css.map */

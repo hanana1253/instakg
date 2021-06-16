@@ -1,13 +1,54 @@
-<div class="like">
-  {% if posting.like_users.all %}
-  <p>{{ posting.like_users.all | length }}명이 좋아합니다.</p>
+<form class="like-form" method="POST" action="{% url 'posting:like' posting.pk %}">
+  <p>좋아요 <span class="like-count">{{ posting.like_users.all | length }}</span>개</p>
+  {% if user.profile in posting.like_users.all %}
+  <button type="submit">좋아요 취소</button>
+  {% else %}
+  <button type="submit">좋아요</button>
   {% endif %}
-  <form method="POST" action="{% url 'posting:like' posting.pk %}">
-    {% csrf_token %}
-    {% if user.profile in posting.like_users.all %}
-    <button type="submit" name="like" value="unlike">좋아요 취소</button>
-    {% else %}
-    <button type="submit" name="like" value="like">좋아요</button>
-    {% endif %}
-  </form>
-</div>
+</form>
+<script type="text/javascript">
+const $like_form = document.querySelector('.like-form')
+
+const toggleLike = eventtarget => {
+  console.log('toggleLike호출도 잘된다')
+  const csrftoken = getCookie('csrftoken');
+  function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  fetch("{% url 'posting:like' posting.pk %}", {
+    method: "POST",
+    headers: {
+        "X-CSRFToken": csrftoken,
+    },
+    body: JSON.stringify({
+        'msg': "Here's my posted data!"
+    })
+  }).then(res=>{
+    return res.json();
+  }).then(data => {
+    console.log(data);
+    eventtarget.querySelector('button').textContent = data['button_msg'];
+    eventtarget.querySelector('.like-count').textContent = data['count'];
+  }).catch(() => {
+    console.error("Errororroroor", error);
+  })
+}
+
+$like_form.onsubmit = e => {
+  e.preventDefault()
+  console.log('onsubmit까진 잘된다')
+  toggleLike(e.target)
+}
+</script>

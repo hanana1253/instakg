@@ -1,3 +1,6 @@
+import json
+from django.http import JsonResponse
+from django.core import serializers
 from django.shortcuts import render, redirect
 from django.views import View, generic
 from posting.models import Posting
@@ -10,8 +13,7 @@ from utils import get_time_passed
 # Create your views here.
 class IndexTimelineView(View):
     def get(self, request, *args, **kwargs):
-        context = { 'postings_list': PostingService.find_all(), 'now': -time.time() }
-        print('', (float(time.time())-float(context['postings_list'].first().created_at))//(60*60), '시간 경과')
+        context = { 'postings_list': PostingService.find_all(request.user.profile), 'now': -time.time() }
         return render(request, 'index.html', context)
 
 class PostingDetailView(generic.DetailView):
@@ -69,27 +71,29 @@ class PostingDeleteView(View):
 class PostingLikeView(View):
     def post(self, request, *args, **kwargs):
         like_dto = self._build_like_dto(request)
-        PostingService.like(like_dto)
-        return redirect('index')
+        like_data = PostingService.like(like_dto)
+        print(json.loads(request.body)['msg'])
+        return JsonResponse(like_data)
 
     def _build_like_dto(self, request):
         return LikeDto(
             target_pk=self.kwargs['posting_pk'],
             my_profile=request.user.profile,
-            action=request.POST['like']
         )
 
 class CommentAddView(View):
     def post(self, request, *args, **kwargs):
         comment_dto = self._build_comment_dto(request)
-        CommentService.create(comment_dto)
-        return redirect('index')
+        comment_data = CommentService.create(comment_dto)
+        print(comment_data)
+        print(json.loads(request.body))
+        return JsonResponse(comment_data)
 
     def _build_comment_dto(self, request):
         return CommentDto(
             posting_pk=self.kwargs['posting_pk'],
             writer=request.user.profile,
-            content=request.POST['content']
+            content=json.loads(request.body)['new_comment']
         )
 
 class CommentLikeView(View):
@@ -97,11 +101,10 @@ class CommentLikeView(View):
         like_dto = self._build_like_dto(request)
         CommentService.like(like_dto)
         print(' Did it work?')
-        return redirect('index')
+        return JsonResponse({'message': 'hello'})
 
     def _build_like_dto(self, request):
         return LikeDto(
             target_pk=self.kwargs['comment_pk'],
             my_profile=request.user.profile,
-            action=request.POST['like']
         )
