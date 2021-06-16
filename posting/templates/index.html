@@ -14,7 +14,7 @@
     <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 게시물이다</h3>
     <div class="author-profile">
       <img class="profile-img" src="{{ posting.author.profile_img.url }}" alt="글쓴이 프로필사진"/>
-      <a href="{% url 'user:detail' posting.author.pk %}"><span>{{ author.user.username }}</span></a>
+      <a href="{% url 'user:detail' posting.author.pk %}"><span>{{ posting.author.user.username }}</span></a>
     </div>
     <figure>
       <a class="posting-img" href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
@@ -30,4 +30,5 @@
 <img src="https://www.instagram.com/static/images/homepage/home-phones@2x.png/9364675fb26a.png" alt="메인페이지"/>
 {% include 'login-form.html' %}
 {% endif %}
+
 {% endblock maincontent %}

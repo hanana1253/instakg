@@ -1,6 +1,4 @@
-.posting {
-  max-width: 80vw;
-  min-width: 300px;
+.posting {  
   & h3 {
     color: red;
   }
@@ -13,8 +11,8 @@
     }
   }
   & .posting-img {
-    width: 100%;
-  }
-  
+    max-width: 80vw;
+    min-width: 300px;
+  }  
 }
 

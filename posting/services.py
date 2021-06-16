@@ -33,10 +33,12 @@ class PostingService():
         target_posting = Posting.objects.filter(pk=dto.target_pk).first()
         if dto.my_profile not in target_posting.like_users.all():
             target_posting.like_users.add(dto.my_profile)
+            like_count = len(target_posting.like_users.all())
+            return {'count': like_count, 'button_msg': '좋아요 취소'}
         else:
             target_posting.like_users.remove(dto.my_profile)
-        return {'error': {'state': False }}
-
+            like_count = len(target_posting.like_users.all())
+            return {'count': like_count, 'button_msg': '좋아요'}
 
 class CommentService():
     @staticmethod
@@ -56,4 +58,4 @@ class CommentService():
             target_comment.like_users.add(dto.my_profile)
         else:
             target_comment.like_users.remove(dto.my_profile)
-        return {'error': {'state': False }}
+        return {'error': {'state': False } }

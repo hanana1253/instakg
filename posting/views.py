@@ -1,3 +1,6 @@
+import json
+from django.http import JsonResponse
+from django.core import serializers
 from django.shortcuts import render, redirect
 from django.views import View, generic
 from posting.models import Posting
@@ -69,8 +72,9 @@ class PostingDeleteView(View):
 class PostingLikeView(View):
     def post(self, request, *args, **kwargs):
         like_dto = self._build_like_dto(request)
-        PostingService.like(like_dto)
-        return redirect('index')
+        like_data = PostingService.like(like_dto)
+        print(json.loads(request.body)['msg'])
+        return JsonResponse(like_data)
 
     def _build_like_dto(self, request):
         return LikeDto(
@@ -96,7 +100,7 @@ class CommentLikeView(View):
         like_dto = self._build_like_dto(request)
         CommentService.like(like_dto)
         print(' Did it work?')
-        return redirect('index')
+        return JsonResponse({'message': 'hello'})
 
     def _build_like_dto(self, request):
         return LikeDto(

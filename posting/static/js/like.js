@@ -1,18 +1,7 @@
-<div class="like">
-  <form class="like-form" method="POST" action="{% url 'posting:like' posting.pk %}">
-    <p><span class="like-count">{{ posting.like_users.all | length }}</span>명이 좋아합니다.</p>
-    {% if user.profile in posting.like_users.all %}
-    <button type="submit">좋아요 취소</button>
-    {% else %}
-    <button type="submit">좋아요</button>
-    {% endif %}
-  </form>
+const $test = document.querySelector('.like-form')
 
-<script type="text/javascript">
-  const $like_form = document.querySelector('.like-form')
-
-  const toggleLike = eventtarget => {
-    console.log('toggleLike호출도 잘된다')
+  const toggleLike = () => {
+    console.log('toggleLike호출도 잘되는데')
     const csrftoken = getCookie('csrftoken');
     function getCookie(name) {
         let cookieValue = null;
@@ -35,23 +24,20 @@
           "X-CSRFToken": csrftoken,
       },
       body: JSON.stringify({
-          'msg': "Here's my posted data!"
+          myData: "Here's my posted data!"
       })
     }).then(res=>{
       return res.json();
     }).then(data => {
       console.log(data);
-      eventtarget.querySelector('button').textContent = data['button_msg'];
-      eventtarget.querySelector('.like-count').textContent = data['count'];
     }).catch(() => {
       console.error("Errororroroor", error);
     })
   }
 
-  $like_form.onsubmit = e => {
+  $test.onsubmit = e => {
     e.preventDefault()
-    console.log('onsubmit까진 잘된다')
-    toggleLike(e.target)
+    console.log('onsubmit까진 잘됐는데')
+    
+    toggleLike()
   }
-</script>
-</div>
