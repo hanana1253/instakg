@@ -7,15 +7,17 @@
   <title>Instakilogram</title>
   <link rel="stylesheet"  type="text/css" href="/posting/static/css/style.css">
   
-<link rel="stylesheet" type="text/css" href="/posting/static/css/timeline.css">
+<link rel="stylesheet" type="text/css" href="/posting/static/css/detail.css">
 
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <h1 class="logo">InstaKilogram</h1>
+      
+      
     </header>
     <main class="main">
+      
 <nav class="navbar">
   <ul class="reset-list">
     <li><a href="/">홈화면</a></li>
@@ -25,19 +27,20 @@
     <li><a href="/profile/5/">마이페이지</a></li>
   </ul>
 </nav>
-  <article class="posting">
-    <div class="author-profile">
-      <img class="profile-img" src="/media/profile_pic/hanana1253.jpeg" alt="hanana1253님의 프로필사진"/>
-      <a href="/profile/1/"><span>hanana1253</span></a>
-    </div>
-    <div class="posting-detail">
-      <a class="posting-img" href="/posting/1" title="게시물로 이동"><img src="/media/posting_pics/hanana1253.jpeg" alt="업로드된 사진" /></a>
-      <form class="like-form" method="POST" action="/posting/like/1">
-  <p>좋아요 <span class="like-count">1</span>개</p>
-  
-  <button type="submit">좋아요</button>
-  
-</form>
+<article class="detail">
+  <img src="/media/posting_pics/hanana1253.jpeg" alt="이한결이 올린 게시물 사진" />
+  <section class="detail-desc">
+    <h3><a class="author-profile" href="/profile/1/">hanana1253</a></h3>
+    
+    <p><a class="author-profile" href="/profile/1/">hanana1253</a>: 하나나의 사진입니다.</p>
+    <p>6일 전</p>
+  </section>
+  <form class="like-form" method="POST" action="/posting/like/1">
+    <p>좋아요 <span class="like-count">1</span>개</p>
+    
+    <button type="submit">좋아요</button>
+    
+  </form>
 <script type="text/javascript">
 const $like_form = document.querySelector('.like-form')
 
@@ -84,30 +87,30 @@ $like_form.onsubmit = e => {
   toggleLike(e.target)
 }
 </script>
-      <a class="author-username" href="/profile/1/">hanana1253</a> 하나나의 사진입니다.
-      <div class="comments">
+  <div class="comments">
   
-  <h4>나는 댓글이다</h4>
   <ul class="comments-list reset-list">
     
     <li class="comment">
       <a href="/profile/5/">test04</a>
-      <span>: 댓글아 달려라</span>
+      <span> 댓글아 달려라</span>
+      
+      <p>1명이 좋아합니다.</p>
       
       <form method="POST" action="/posting/commentlike/2">
-        <input type="hidden" name="csrfmiddlewaretoken" value="l8mkR6haXlmwAq6sddJ39tIgAlzPC7mCmuqb9k4dFLJozjJwLVsPdHta7nvEK0nb">
+        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
         
-        <button type="submit" name="like" value="like">좋아요</button>
+        <button type="submit" name="like" value="unlike">좋아요 취소</button>
         
       </form>
     </li>
     
     <li class="comment">
       <a href="/profile/5/">test04</a>
-      <span>: 랄랄라</span>
+      <span> 랄랄라</span>
       
       <form method="POST" action="/posting/commentlike/4">
-        <input type="hidden" name="csrfmiddlewaretoken" value="l8mkR6haXlmwAq6sddJ39tIgAlzPC7mCmuqb9k4dFLJozjJwLVsPdHta7nvEK0nb">
+        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
         
         <button type="submit" name="like" value="like">좋아요</button>
         
@@ -116,10 +119,10 @@ $like_form.onsubmit = e => {
     
     <li class="comment">
       <a href="/profile/5/">test04</a>
-      <span>: 랄랄라</span>
+      <span> 랄랄라</span>
       
       <form method="POST" action="/posting/commentlike/5">
-        <input type="hidden" name="csrfmiddlewaretoken" value="l8mkR6haXlmwAq6sddJ39tIgAlzPC7mCmuqb9k4dFLJozjJwLVsPdHta7nvEK0nb">
+        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
         
         <button type="submit" name="like" value="like">좋아요</button>
         
@@ -128,10 +131,10 @@ $like_form.onsubmit = e => {
     
     <li class="comment">
       <a href="/profile/5/">test04</a>
-      <span>: 랄랄라</span>
+      <span> 랄랄라</span>
       
       <form method="POST" action="/posting/commentlike/6">
-        <input type="hidden" name="csrfmiddlewaretoken" value="l8mkR6haXlmwAq6sddJ39tIgAlzPC7mCmuqb9k4dFLJozjJwLVsPdHta7nvEK0nb">
+        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
         
         <button type="submit" name="like" value="like">좋아요</button>
         
@@ -140,10 +143,22 @@ $like_form.onsubmit = e => {
     
     <li class="comment">
       <a href="/profile/5/">test04</a>
-      <span>: ㅇㅇㅇ</span>
+      <span> ㅇㅇㅇ</span>
       
       <form method="POST" action="/posting/commentlike/18">
-        <input type="hidden" name="csrfmiddlewaretoken" value="l8mkR6haXlmwAq6sddJ39tIgAlzPC7mCmuqb9k4dFLJozjJwLVsPdHta7nvEK0nb">
+        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
+        
+        <button type="submit" name="like" value="like">좋아요</button>
+        
+      </form>
+    </li>
+    
+    <li class="comment">
+      <a href="/profile/5/">test04</a>
+      <span> 댓글이달립니다</span>
+      
+      <form method="POST" action="/posting/commentlike/20">
+        <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
         
         <button type="submit" name="like" value="like">좋아요</button>
         
@@ -153,78 +168,71 @@ $like_form.onsubmit = e => {
   </ul>
   
 </div>
-    </div>
-  </article>
-
-  <article class="posting">
-    <h3>나는 테스트1이 작성한 2번 게시물이다</h3>
-    <div class="author-profile">
-      <img class="profile-img" src="/media/profile_pic/chick.png" alt="test01님의 프로필사진"/>
-      <a href="/profile/2/"><span>test01</span></a>
-    </div>
-    <div class="posting-detail">
-      <a class="posting-img" href="/posting/2" title="게시물로 이동"><img src="/media/posting_pics/chick.png" alt="업로드된 사진" /></a>
-      <form class="like-form" method="POST" action="/posting/like/2">
-  <p>좋아요 <span class="like-count">3</span>개</p>
-  
-  <button type="submit">좋아요 취소</button>
-  
+  <form class="comment-form" method="POST" action="/posting/comment/1">
+  <input type="hidden" name="csrfmiddlewaretoken" value="g05sjqVRJ09K4CC64p7VLhdr8k5nVknLhm9jBEIUrqwC3vfaC7QHPvYlFm1c3dok">
+  <input class="comment-input" type="text" name="content" placeholder="댓글 달기" title="댓글 달기"/>
+  <button type="submit">등록</button>
 </form>
 <script type="text/javascript">
-const $like_form = document.querySelector('.like-form')
+  let $comment_form = document.querySelector('.comment-form')
+  let $comment_input = document.querySelector('.comment-input')
+  let $comments_list = document.querySelector('.comments-list')
 
-const toggleLike = eventtarget => {
-  console.log('toggleLike호출도 잘된다')
-  const csrftoken = getCookie('csrftoken');
-  function getCookie(name) {
-      let cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          const cookies = document.cookie.split(';');
-          for (let i = 0; i < cookies.length; i++) {
-              const cookie = cookies[i].trim();
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
+  const createComment = eventtarget => {
+    console.log('이벤트 콜백 호출 잘된다')
+    const csrftoken = getCookie('csrftoken');
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    fetch("/posting/comment/1", {
+      method: "POST",
+      headers: {
+          "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({
+          'new_comment': $comment_input.value
+      })
+    }).then(res=>{
+      return res.json();
+    }).then(data => {
+      console.log(data);
+      const comment_data = {
+        'username': data['username'],
+        'comment': data['comment'],
+        'user_pk': data['user_pk']
       }
-      return cookieValue;
-  }
-  fetch("/posting/like/2", {
-    method: "POST",
-    headers: {
-        "X-CSRFToken": csrftoken,
-    },
-    body: JSON.stringify({
-        'msg': "Here's my posted data!"
+      const $new_comment = document.createElement("li");
+      $new_comment.innerHTML = `<a href="/profile/${comment_data['user_pk']}/">${comment_data['username']}</a>
+                <span>: ${comment_data['comment']}</span>
+                <form method="POST" action="/posting/commentlike/${data['comment_pk']}">
+                  <input type="hidden" name="csrfmiddlewaretoken" value="8Plv6GwJpNkBipgjfzx9yNg9BOwbj1bV9bpmoUjM7dHthiTnNhgVC1138Qs0rUcu">
+                  <button type="submit" name="like" value="like">좋아요</button>
+                </form>`
+      $comments_list.appendChild($new_comment)
+    }).catch(() => {
+      console.error("Errororroroor", error);
     })
-  }).then(res=>{
-    return res.json();
-  }).then(data => {
-    console.log(data);
-    eventtarget.querySelector('button').textContent = data['button_msg'];
-    eventtarget.querySelector('.like-count').textContent = data['count'];
-  }).catch(() => {
-    console.error("Errororroroor", error);
-  })
-}
+  }
 
-$like_form.onsubmit = e => {
-  e.preventDefault()
-  console.log('onsubmit까진 잘된다')
-  toggleLike(e.target)
-}
+  $comment_form.onsubmit = e => {
+    e.preventDefault()
+    console.log('onsubmit까진 잘된다')
+    createComment(e.target)
+  }
 </script>
-      <a class="author-username" href="/profile/2/">test01</a> 병아리입니다.
-      <div class="comments">
-  
-</div>
-    </div>
-  </article>
-
-
-
+</article>
 
     </main>
   </div>
