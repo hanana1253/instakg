@@ -8,9 +8,9 @@
 <article class="detail">
   <img src="{{ posting.photo.url }}" alt="{{ posting.author.name }}이 올린 게시물 사진" />
   <h3><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a></h3>
-  <form method="POST" action="{% url 'posting:edit' posting.pk %}" enctype="multipart/form-data">
+  <form method="POST" action="{% url 'posting:edit' posting.pk %}">
     {% csrf_token %}  
-    <label>내용<input type="text" name="content" value="{{ posting.content }}"" /></label>
+    <label>내용<input type="text" name="content" value="{{ posting.content }}" /></label>
     <button type="submit">등록</button>
   </form>
   </section>

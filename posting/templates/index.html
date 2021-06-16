@@ -3,17 +3,16 @@
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/timeline.css' %}">
 {% endblock head %}
+{% block header %}
+  <h1 class="logo">InstaKilogram</h1>
+{% endblock header %}
 {% block maincontent %}
 {% if user.is_authenticated %}
-<h2>나는 로그인 된 상태의 인덱스페이지이다</h2>
-<h3> {{ now }} </h3>
 {% include 'navbar.html' %}
-<hr>
 {% for posting in postings_list.all %}
   <article class="posting">
-    <h3>나는 {{ posting.author.name }}이 작성한 {{ posting.pk }}번 게시물이다</h3>
     <div class="author-profile">
-      <img class="profile-img" src="{{ posting.author.profile_img.url }}" alt="글쓴이 프로필사진"/>
+      <img class="profile-img" src="{{ posting.author.profile_img.url }}" alt="{{ posting.author.user.username }}님의 프로필사진"/>
       <a href="{% url 'user:detail' posting.author.pk %}"><span>{{ posting.author.user.username }}</span></a>
     </div>
     <div class="posting-detail">
