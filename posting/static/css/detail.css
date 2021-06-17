@@ -6,17 +6,25 @@
   border: 1px solid #bbb;
   border-radius: 0.5%;
   display: grid;
-  grid-template-rows: 10vw 10vw 40vw 10vw;
+  grid-template-rows: 30vh 5vh 35vh 10vh;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   grid-template-areas: "img description" "img like_form" "img comments" "img comment_form";
 }
-.detail img {
+.detail > img {
   grid-area: img;
   width: 40vw;
 }
 .detail .detail-desc {
   grid-area: description;
+}
+.detail .detail-desc img {
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+}
+.detail .detail-desc > form {
+  display: inline-block;
 }
 .detail .like-form {
   grid-area: like_form;

@@ -1,6 +1,8 @@
+from posting.services import PostingService
 from django.shortcuts import render, redirect
 from django.views import generic, View
 from django.contrib import auth
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from authentication.models import Profile
 from authentication.dto import EditDto, SignupDto, LoginDto
@@ -14,7 +16,9 @@ class ProfileDetailView(generic.DetailView):
     model = Profile
     context_object_name = 'profile'
 
-class ProfileEditView(View):
+class ProfileEditView(LoginRequiredMixin, View):
+    redirect_field_name = None
+    login_url = '/user/login/'
     def get(self, request, *args, **kwargs):
         context = {'profile': Profile.objects.filter(pk=request.user.profile.pk).first()}
         return render(request, 'profile_edit.html', context)

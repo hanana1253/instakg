@@ -42,6 +42,9 @@
   }
   & .profile-introduction {
     grid-area: introduction;
+    & > input {
+      width: 30vw;
+    }
   }
 }
 .photo-list {

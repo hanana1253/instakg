@@ -12,7 +12,7 @@
 <article class="detail">
   <img src="{{ posting.photo.url }}" alt="{{ posting.author.name }}이 올린 게시물 사진" />
   <section class="detail-desc">
-    <h3><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a></h3>
+    <h3> <img src="{{ posting.author.profile_img.url }}" alt=""><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a></h3>
     {% if user == posting.author.user %}
     <a href="{% url 'posting:edit' posting.pk %}">수정하기</a>
     <form method="POST" action="{% url 'posting:delete' posting.pk %}">

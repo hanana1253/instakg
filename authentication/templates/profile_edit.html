@@ -12,7 +12,7 @@
   <img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
   <h3 class="profile-username">@{{ profile.user.username }}</h3>
   <ul class="profile-counters reset-list">
-    <li class="post-count">게시물 <span>{{ profile.posts.all | length }}</span></li>
+    <li class="post-count">게시물 <span>{{ profile.postings.all | length }}</span></li>
     <li class="followers-count">팔로워 <span>{{ profile.relationship.followers.all | length }}</span></li>
     <li class="following-count">팔로우 <span>{{ profile.target_relationship.all | length }}</span></li>
   </ul>

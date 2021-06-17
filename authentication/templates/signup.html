@@ -12,20 +12,20 @@
     <form method="POST" action="{% url 'user:signup' %}">
       {% csrf_token %}
       <label class="label">
-        <span>성명</span>
-        <input type="text" name="name" />
+        <!-- <span>성명</span> -->
+        <input type="text" name="name" placeholder="성명"/>
       </label>
       <label class="label">
-        <span>아이디</span>
-        <input type="text" name="userid" />
+        <!-- <span>아이디</span> -->
+        <input type="text" name="userid" placeholder="아이디"/>
       </label>
       <label class="label">
-        <span>비밀번호</span>
-        <input type="password" name="userpw" />
+        <!-- <span>비밀번호</span> -->
+        <input type="password" name="userpw" placeholder="비밀번호"/>
       </label>
       <label class="label">
-        <span>비밀번호 확인</span>
-        <input type="password" name="userpw-check" />
+        <!-- <span>비밀번호 확인</span> -->
+        <input type="password" name="userpw-check" placeholder="비밀번호 확인"/>
       </label>
       <button type="submit">가입</button>
     </form>

@@ -11,12 +11,17 @@ class PostingService():
         return postings
 
     @staticmethod
+    def find_by_author(my_profile):
+        postings = Posting.objects.filter(author=my_profile)
+        return postings
+
+    @staticmethod
     def find_by_pk(pk):
         return Posting.objects.filter(pk=pk).first()
 
     @staticmethod
     def add(dto: PostingDto):
-        post = Posting.objects.create(author=dto.author, photo=dto.photo, content=dto.content)
+        post = Posting.objects.create(author=dto.author, photo=dto.photo, content=dto.content, created_at=time.time())
         return {'error':{'state': False }, 'data': post}
 
     @staticmethod

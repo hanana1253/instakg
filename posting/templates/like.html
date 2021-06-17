@@ -1,10 +1,13 @@
 <form class="like-form" method="POST" action="{% url 'posting:like' posting.pk %}">
-  <p>좋아요 <span class="like-count">{{ posting.like_users.all | length }}</span>개</p>
-  {% if user.profile in posting.like_users.all %}
-  <button type="submit">좋아요 취소</button>
-  {% else %}
-  <button type="submit">좋아요</button>
-  {% endif %}
+  <p>
+    좋아요 <span class="like-count">{{ posting.like_users.all | length }}</span>
+    {% if user.profile in posting.like_users.all %}
+    <button type="submit">좋아요 취소</button>
+    {% else %}
+    <button type="submit">좋아요</button>
+    {% endif %}
+  </p>
+  
 </form>
 <script type="text/javascript">
 const $like_form = document.querySelector('.like-form')

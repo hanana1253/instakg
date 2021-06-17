@@ -23,7 +23,9 @@ class IndexTimelineView(View):
         context = { 'postings_list': postings_list, 'now': -time.time() }
         return render(request, 'index.html', context)
 
-class PostingDetailView(generic.DetailView):
+class PostingDetailView(LoginRequiredMixin, generic.DetailView):
+    redirect_field_name = None
+    login_url = '/user/login/'
     template_name = 'posting_detail.html'
     model = Posting
     context_object_name = 'posting'
@@ -33,7 +35,9 @@ class PostingDetailView(generic.DetailView):
         context['since_created'] = get_time_passed(context['posting'])
         return context
 
-class PostingAddView(View):
+class PostingAddView(LoginRequiredMixin, View):
+    redirect_field_name = None
+    login_url = '/user/login/'
     def get(self, request, *args, **kwargs):
         return render(request, 'add.html')
 
@@ -52,7 +56,10 @@ class PostingAddView(View):
             content=request.POST['content']   
         )
 
-class PostingEditView(View):
+class PostingEditView(LoginRequiredMixin, View):
+    redirect_field_name = None
+    login_url = '/user/login/'
+
     def get(self, request, *args, **kwargs):
         target_posting = PostingService.find_by_pk(kwargs['pk'])
         context = {'posting': target_posting}
@@ -69,13 +76,19 @@ class PostingEditView(View):
             content=post_data['content']
         )
 
-class PostingDeleteView(View):
+class PostingDeleteView(LoginRequiredMixin, View):
+    redirect_field_name = None
+    login_url = '/user/login/'
+
     def post(self, request, *args, **kwargs):
         target_posting_pk = kwargs['pk']
         PostingService.delete(target_posting_pk)
         return redirect('index')
 
-class PostingLikeView(View):
+class PostingLikeView(LoginRequiredMixin, View):
+    redirect_field_name = None
+    login_url = '/user/login/'
+
     def post(self, request, *args, **kwargs):
         like_dto = self._build_like_dto(request)
         like_data = PostingService.like(like_dto)
@@ -88,7 +101,9 @@ class PostingLikeView(View):
             my_profile=request.user.profile,
         )
 
-class CommentAddView(View):
+class CommentAddView(LoginRequiredMixin, View):
+    redirect_field_name = None
+    login_url = '/user/login/'
     def post(self, request, *args, **kwargs):
         comment_dto = self._build_comment_dto(request)
         comment_data = CommentService.create(comment_dto)
