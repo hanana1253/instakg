@@ -61,5 +61,10 @@ body {
   padding: 10px;
   z-index: 1000;
 }
+.post-form label button, .redirect label button {
+  width: 100%;
+  text-align: center;
+  background-color: #18529b;
+}
 
 /*# sourceMappingURL=authstyle.css.map */

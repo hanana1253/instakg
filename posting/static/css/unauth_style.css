@@ -44,4 +44,9 @@ main img {
   z-index: 1000;
 }
 
+.post-form button {
+  width: 100%;
+  text-align: center;
+  background-color: #18529b;
+}
 /*# sourceMappingURL=unauth_style.css.map */

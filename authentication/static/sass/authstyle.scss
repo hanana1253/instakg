@@ -59,5 +59,10 @@ body {
       padding: 10px;
       z-index: 1000;
     }
+    & button {
+      width: 100%;
+      text-align: center;
+      background-color: #18529b;
+    }
   }
 }
