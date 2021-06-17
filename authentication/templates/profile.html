@@ -13,12 +13,12 @@
   <img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
   <h3 class="profile-username">@{{ profile.user.username }}</h3>
   <ul class="profile-counters reset-list">
-    <li class="post-count">게시물 <span>{{ profile.posts.all | length }}</span></li>
+    <li class="post-count">게시물 <span>{{ profile.postings.all | length }}</span></li>
     <li class="followers-count">팔로워 <span>{{ profile.relationship.followers.all | length }}</span></li>
     <li class="following-count">팔로우 <span>{{ profile.target_relationship.all | length }}</span></li>
   </ul>
-  <h3>{{ profile.name }}</h3>
-  <p>{{ profile.introduction }}</p>
+  <h3 class="profile-name">{{ profile.name }}</h3>
+  <p class="profile-introduction">{{ profile.introduction }}</p>
   {% if user == profile.user %}
   <a href="{% url 'user:edit' profile.pk %}">프로필 편집</a>
   {% else %}
@@ -35,7 +35,7 @@
   {% for posting in profile.postings.all %}
   {% if posting.is_deleted %}
   {% else %}
-  <img src="{{ posting.photo.url }}" alt="사진" />
+  <a href="{% url 'posting:detail' posting.pk %}"><img src="{{ posting.photo.url }}" alt="사진" /></a>
   {% endif %}
   {% endfor %}
 </div>

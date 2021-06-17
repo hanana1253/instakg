@@ -4,10 +4,9 @@
   <button type="submit">등록</button>
 </form>
 <script type="text/javascript">
-  let $comment_form = document.querySelector('.comment-form')
-  let $comment_input = document.querySelector('.comment-input')
-  let $comments_list = document.querySelector('.comments-list')
-
+  const $comment_form = document.querySelector('.comment-form') 
+  const $comment_input = document.querySelector('.comment-input')
+  const $comments_list = document.querySelector('.comments-list')
   const createComment = eventtarget => {
     console.log('이벤트 콜백 호출 잘된다')
     const csrftoken = getCookie('csrftoken');
@@ -38,7 +37,7 @@
       return res.json();
     }).then(data => {
       console.log(data);
-      $comment_input.textContent = '';
+      $comment_input.value = '';
       const comment_data = {
         'username': data['username'],
         'comment': data['comment'],

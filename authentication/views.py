@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.contrib import auth
 
 from authentication.models import Profile
-from authentication.dto import SignupDto, LoginDto
+from authentication.dto import EditDto, SignupDto, LoginDto
 from authentication.services import UserService
 
 from social.services import FollowService
@@ -20,6 +20,16 @@ class ProfileEditView(View):
         return render(request, 'profile_edit.html', context)
 
     def post(self, request, *args, **kwargs):
+        edit_dto = self._build_edit_dto(request)
+        UserService.edit(edit_dto)
+        return redirect('user:detail', request.user.profile.pk)
+
+    @staticmethod
+    def _build_edit_dto(request):
+        return EditDto(
+            my_pk=request.user.profile.pk,
+            introduction=request.POST['introduction']
+        )
         pass
 
 class SignupView(View):

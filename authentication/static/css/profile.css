@@ -12,7 +12,7 @@
   grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 10px;
   align-items: center;
-  grid-template-areas: "img img username username follow-btn" "img img counters counters counters" "img img nickname nickname ." "img img description description .";
+  grid-template-areas: "img img username username follow-btn" "img img counters counters counters" "img img name name ." "img img introduction introduction .";
 }
 .profile img {
   width: 20vw;
@@ -34,11 +34,11 @@
 .profile .profile-counters span {
   font-weight: 550;
 }
-.profile > h3 {
-  grid-area: nickname;
+.profile .profile-name {
+  grid-area: name;
 }
-.profile > p {
-  grid-area: description;
+.profile .profile-introduction {
+  grid-area: introduction;
 }
 
 .photo-list {

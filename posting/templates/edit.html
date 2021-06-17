@@ -3,8 +3,10 @@
 {% block head %}
 <link rel="stylesheet"  type="text/css" href="{% static 'css/detail.css' %}">
 {% endblock head %}
+{% block header %}
+  <h1 class="logo">InstaKilogram</h1>
+{% endblock header %}
 {% block maincontent %}
-<h2>나는 포스팅 edit 페이지</h2>
 <article class="detail">
   <img src="{{ posting.photo.url }}" alt="{{ posting.author.name }}이 올린 게시물 사진" />
   <h3><a class="author-profile" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a></h3>

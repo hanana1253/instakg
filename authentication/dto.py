@@ -11,3 +11,8 @@ class SignupDto():
 class LoginDto():
     userid: str
     userpw: str
+
+@dataclass
+class EditDto():
+    my_pk: int
+    introduction: str

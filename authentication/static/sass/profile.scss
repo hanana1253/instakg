@@ -15,8 +15,8 @@
   grid-template-areas:
     "img img username username follow-btn"
     "img img counters counters counters"
-    "img img nickname nickname ."
-    "img img description description .";
+    "img img name name ."
+    "img img introduction introduction .";
   & img {
     width: 20vw;
     height: 20vw;
@@ -37,11 +37,11 @@
       font-weight: 550;
     }
   }
-  & > h3 {
-    grid-area: nickname;
+  & .profile-name {
+    grid-area: name;
   }
-  & > p {
-    grid-area: description;
+  & .profile-introduction {
+    grid-area: introduction;
   }
 }
 .photo-list {

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 
 from authentication.models import Profile
-from authentication.dto import SignupDto, LoginDto
+from authentication.dto import EditDto, SignupDto, LoginDto
 
 from social.models import Relationship
 from utils import build_error_data, build_success_data
@@ -25,6 +25,7 @@ class UserService():
         relationship.followers.add(profile)
         return build_success_data(user)
 
+    @staticmethod
     def login(dto: LoginDto):
         if not (dto.userid and dto.userpw):
             return build_error_data('MISSING_INPUT')
@@ -37,3 +38,11 @@ class UserService():
             return build_error_data('INVALID_PW')
         
         return build_success_data(auth_user)
+    
+    @staticmethod
+    def edit(dto: EditDto):
+        my_profile = Profile.objects.filter(pk=dto.my_pk)
+        my_profile.update(
+            introduction=dto.introduction
+        )
+        return build_success_data(my_profile)
