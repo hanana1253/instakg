@@ -9,7 +9,7 @@
 {% block maincontent %}
 {% include 'navbar.html' %}
 <div class="profile">
-  <img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
+  <img src="{{ profile.profile_img_url }}" alt="프로필사진"/>
   <h3 class="profile-username">@{{ profile.user.username }}</h3>
   <ul class="profile-counters reset-list">
     <li class="post-count">게시물 <span>{{ profile.postings.all | length }}</span></li>

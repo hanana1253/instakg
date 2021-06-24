@@ -10,7 +10,7 @@
 {% include 'navbar.html' %}
 <!-- 프로필 사진 -->
 <div class="profile">
-  <img src="{{ profile.profile_img.url }}" alt="프로필사진"/>
+  <img src="{{ profile.profile_img_url }}" alt="프로필사진"/>
   <h3 class="profile-username">@{{ profile.user.username }}</h3>
   <ul class="profile-counters reset-list">
     <li class="post-count">게시물 <span>{{ profile.postings.all | length }}</span></li>
@@ -35,7 +35,7 @@
   {% for posting in profile.postings.all %}
   {% if posting.is_deleted %}
   {% else %}
-  <a href="{% url 'posting:detail' posting.pk %}"><img src="{{ posting.photo.url }}" alt="사진" /></a>
+  <a href="{% url 'posting:detail' posting.pk %}"><img src="{{ posting.img_url }}" alt="사진" /></a>
   {% endif %}
   {% endfor %}
 </div>

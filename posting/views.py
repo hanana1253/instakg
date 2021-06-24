@@ -53,7 +53,7 @@ class PostingAddView(LoginRequiredMixin, View):
         return PostingDto(
             author=request.user.profile,
             photo=request.FILES['photo'],
-            content=request.POST['content']   
+            content=request.POST['content'],
         )
 
 class PostingEditView(LoginRequiredMixin, View):

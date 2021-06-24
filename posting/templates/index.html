@@ -16,11 +16,11 @@
 {% for posting in postings_list.all %}
   <article class="posting">
     <div class="author-profile">
-      <img class="profile-img" src="{{ posting.author.profile_img.url }}" alt="{{ posting.author.user.username }}님의 프로필사진"/>
+      <img class="profile-img" src="{{ posting.author.profile_img_url }}" alt="{{ posting.author.user.username }}님의 프로필사진"/>
       <a href="{% url 'user:detail' posting.author.pk %}"><span>{{ posting.author.user.username }}</span></a>
     </div>
     <div class="posting-detail">
-      <a class="posting-img" href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.photo.url }}" alt="업로드된 사진" /></a>
+      <a class="posting-img" href="{% url 'posting:detail' posting.pk %}" title="게시물로 이동"><img src="{{ posting.img_url }}" alt="업로드된 사진" /></a>
       {% include 'like.html' %}
       <a class="author-username" href="{% url 'user:detail' posting.author.pk %}">{{ posting.author.user.username }}</a> {{ posting.content }}
       {% include 'comment.html' %}

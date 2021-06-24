@@ -1,6 +1,10 @@
 from posting.dto import PostingDto, UpdateDto, CommentDto, LikeDto
+from config.settings import AWS_ACCESS_KEY_ID, AWS_S3_REGION_NAME, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME
 from authentication.models import Profile
 from posting.models import Posting, Comment
+import boto3
+from boto3.session import Session
+from datetime import datetime
 import time
 
 class PostingService():
@@ -21,7 +25,26 @@ class PostingService():
 
     @staticmethod
     def add(dto: PostingDto):
-        post = Posting.objects.create(author=dto.author, photo=dto.photo, content=dto.content, created_at=time.time())
+        file = dto.photo
+        session = Session(
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+            region_name=AWS_S3_REGION_NAME,
+        )
+        s3 = session.resource('s3')
+        now = datetime.now().strftime('%Y%H%M%S')
+        img_object = s3.Bucket(AWS_STORAGE_BUCKET_NAME).put_object(
+            Key=now+file.name,
+            Body=file
+        )
+        s3_url = 'http://django-s3-practice-1.s3.ap-northeast-2.amazonaws.com/'
+        post = Posting.objects.create(
+            author=dto.author, 
+            photo=dto.photo, 
+            content=dto.content, 
+            created_at=time.time(),
+            img_url=s3_url+now+file.name
+            )
         return {'error':{'state': False }, 'data': post}
 
     @staticmethod
