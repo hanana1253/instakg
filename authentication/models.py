@@ -8,4 +8,4 @@ class Profile(BaseFields):
     name = models.CharField(max_length=8)
     introduction = models.TextField(null=True, blank=True)
     profile_img = models.ImageField(upload_to='profile_pic', default='profile_pic/avatar.jpg', null=True, blank=True)
-    profile_img_url = models.TextField()
+    profile_img_url = models.TextField(default='https://django-s3-practice-1.s3.ap-northeast-2.amazonaws.com/avatar.jpg')
