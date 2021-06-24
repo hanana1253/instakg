@@ -1,5 +1,4 @@
 <div class="comments">
-  {% if posting.comments.all %}
   <ul class="comments-list reset-list">
     {% for comment in posting.comments.all %}
     <li class="comment">
@@ -19,5 +18,4 @@
     </li>
     {% endfor %}
   </ul>
-  {% endif %}
 </div>
