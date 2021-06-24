@@ -40,7 +40,6 @@ class PostingService():
         s3_url = 'http://django-s3-practice-1.s3.ap-northeast-2.amazonaws.com/'
         post = Posting.objects.create(
             author=dto.author, 
-            photo=dto.photo, 
             content=dto.content, 
             created_at=time.time(),
             img_url=s3_url+now+file.name
