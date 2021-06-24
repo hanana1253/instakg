@@ -9,6 +9,7 @@ class Posting(BaseFields):
     photo = models.ImageField(upload_to='posting_pics')
     content = models.TextField()
     like_users = models.ManyToManyField(Profile, related_name='liked_postings', blank=True)
+    img_url = models.TextField()
 
 class Comment(BaseFields):
     post = models.ForeignKey(Posting, on_delete=models.CASCADE, related_name='comments')
