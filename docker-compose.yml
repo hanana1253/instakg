@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   dev:
-    container_name: dev
+    container_name: deve
     build:
       context: .
       dockerfile: Dockerfile
