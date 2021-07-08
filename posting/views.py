@@ -15,7 +15,7 @@ def test(request):
     print('요청들어왔다')
     if request.method == "GET":
         print('get으로 들어왔다')
-        return JsonResponse({"msg":"ALLLLL"})
+        return JsonResponse({"msg":"되어라 제발"})
     if request.method == "POST":
         print('post로 들어왔다')
         return JsonResponse({"msg":"OHHHHH"})
