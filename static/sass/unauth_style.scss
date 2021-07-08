@@ -1,0 +1,55 @@
+header {
+  display: none;
+}
+
+main {
+  padding: 0 15vw;
+  & img {
+  width: 30vw;
+  }
+  display: flex;
+}
+
+.auth-container {
+  display: inline-block;
+  min-width: 200px;
+  max-width: 400px;
+  width: 40vw;
+  margin: 10px;
+  font-size: 1rem;
+  border: 1px solid #bbb;
+  // height: 60vh;
+}
+
+.post-form, .redirect {
+  margin: 0 20px;
+  border-top: 1px solid #bbb;
+  & * {
+    padding: 0;
+  }
+  & label {
+    display: block;
+    margin: 0.5rem 0;
+    height: 2.5rem;
+
+    position: relative;
+    & span {
+      vertical-align: top;
+      position: absolute;
+      z-index: 999;
+    }
+    & input {
+      width: 100%;
+      padding: 10px;
+      z-index: 1000;
+    }
+    & button {
+      width: 100%;
+      background-color: #0492C2;
+      color: #fff;
+      border: 1px solid #0492C2;
+      border-radius: 2px;
+      
+    }
+  }
+}

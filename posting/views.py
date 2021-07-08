@@ -1,17 +1,25 @@
 import json
 from django.http import JsonResponse
 from django.core import serializers
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View, generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from posting.models import Posting
 from posting.services import PostingService, CommentService
 from posting.dto import LikeDto, PostingDto, UpdateDto, CommentDto
 import time
 from utils import get_time_passed
 
-
+def test(request):
+    print('요청들어왔다')
+    if request.method == "GET":
+        print('get으로 들어왔다')
+        return JsonResponse({"msg":"ALLLLL"})
+    if request.method == "POST":
+        print('post로 들어왔다')
+        return JsonResponse({"msg":"OHHHHH"})
+    
 # Create your views here.
 class IndexTimelineView(View):
 
@@ -21,7 +29,13 @@ class IndexTimelineView(View):
         except:
             postings_list = None
         context = { 'postings_list': postings_list, 'now': -time.time() }
-        return render(request, 'index.html', context)
+        return HttpResponse(context)
+    
+    def post(self, request):
+        data_from_post = json.load(request)['msg']
+        data = {'msg':data_from_post}
+        print(''+data_from_post)
+        return JsonResponse(data)
 
 class PostingDetailView(LoginRequiredMixin, generic.DetailView):
     redirect_field_name = None

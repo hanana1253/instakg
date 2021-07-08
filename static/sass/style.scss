@@ -1,0 +1,78 @@
+@import url('http://fonts.cdnfonts.com/css/segoe-ui-4');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body * {
+  font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 12px;
+}
+
+.container {
+  background-color: rgba(250, 250, 250, 1);
+  padding: 10vh 0;
+}
+
+.hidden-heading {
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+
+.reset-list {
+  padding-left: 0;
+  list-style-type: none;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 550;
+}
+.logo {
+  position: relative;
+  max-width: 300px;
+  height: calc(10vh - 1px);
+  overflow: hidden;
+  margin: 0 auto;
+}
+.logo::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url(../logo.png) no-repeat center/contain, #fff;  
+}
+.header {
+  background-color: #fff; 
+  height: 10vh;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  border-bottom: 1px solid #bbb;
+}
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10vh;
+  & ul {
+    display: flex;
+    background-color: #fefefe;
+    height: inherit;
+  }
+  & li {
+    text-align: center;
+    flex: 1 1 0px;
+    border: 1px solid #bbb;
+    padding: 2.5vh 0;
+  }
+}

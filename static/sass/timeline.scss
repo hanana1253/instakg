@@ -1,0 +1,31 @@
+.posting {  
+  background-color: #fff;
+  min-width: 30vw;
+  max-width: 60vw;
+  margin: 0 auto;
+  border: 1px solid #bbb;
+  border-radius: 0.5%;
+  & .author-profile {
+    padding: 1vw;
+    & .profile-img {
+      display: inline-block;
+      width: 5vw;
+      height: 5vw;
+      border-radius: 50%;
+    }
+  }
+  & .posting-detail {
+    & a, img {
+      width: 100%;
+    }
+    & p {
+      display: inline-block;
+    }
+  }
+}
+
+.comments-list {
+  & form {
+    display: inline;
+  }
+}
